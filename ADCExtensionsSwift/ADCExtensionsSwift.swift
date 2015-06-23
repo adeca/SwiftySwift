@@ -131,7 +131,7 @@ extension NSThread {
 // MARK: UIColor
 
 extension UIColor {
-    public typealias RGBA = (r: Int, g: Int, b: Int, a: Int)
+    public typealias RGBA = (r: UInt, g: UInt, b: UInt, a: UInt)
 
     public convenience init(rgba: RGBA) {        
         self.init(
@@ -142,7 +142,7 @@ extension UIColor {
         )
     }
     
-    public convenience init(hex:Int) {
+    public convenience init(hex: UInt) {
         let r = (hex & 0xff000000) >> 24
         let g = (hex & 0x00ff0000) >> 16
         let b = (hex & 0x0000ff00) >> 8
