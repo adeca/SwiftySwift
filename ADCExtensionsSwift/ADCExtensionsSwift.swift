@@ -142,11 +142,11 @@ extension UIColor {
         )
     }
     
-    public convenience init(hex: UInt) {
-        let r = (hex & 0xff000000) >> 24
-        let g = (hex & 0x00ff0000) >> 16
-        let b = (hex & 0x0000ff00) >> 8
-        let a = (hex & 0x000000ff)
+    public convenience init(hex: UInt64) {
+        let r = UInt((hex & 0xff000000) >> 24)
+        let g = UInt((hex & 0x00ff0000) >> 16)
+        let b = UInt((hex & 0x0000ff00) >> 8)
+        let a = UInt((hex & 0x000000ff))
         
         self.init(rgba: (r, g, b, a))
     }
