@@ -444,16 +444,28 @@ extension SequenceType {
         } 
     }
     
-    public func all(@noescape condition: (Self.Generator.Element) -> Bool) -> Bool {
+    public func all(@noescape predicate: (Self.Generator.Element) -> Bool) -> Bool {
         return reduce(false) { (old, new) in 
-            old && condition(new) 
+            old && predicate(new) 
         }
     }
     
-    public func any(@noescape condition: (Self.Generator.Element) -> Bool) -> Bool {
+    public func any(@noescape predicate: (Self.Generator.Element) -> Bool) -> Bool {
         return reduce(false) { (old, new) in 
-            old || condition(new) 
+            old || predicate(new) 
         }
+    }
+}
+
+extension CollectionType {
+    public func find(@noescape predicate: (Self.Generator.Element) -> Bool) -> Self.Generator.Element? {
+        return indexOf(predicate).map { self[$0] }
+    }
+}
+
+extension CollectionType where Generator.Element : Equatable {
+    public func find(element: Self.Generator.Element) -> Self.Generator.Element? {        
+        return indexOf(element).map { self[$0] }
     }
 }
 
