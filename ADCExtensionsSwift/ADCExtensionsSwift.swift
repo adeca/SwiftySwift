@@ -352,9 +352,14 @@ extension UIView {
         }
     }
 
-    public class func fromNib(name: String = className, bundle: NSBundle = NSBundle.mainBundle()) -> Self? {  
-        let allObjects = bundle.loadNibNamed(name, owner: nil, options: nil) ?? []
+    public class func fromNibNamed(name: String) -> Self? {  
+        let bundle = NSBundle.mainBundle()
+        let allObjects = bundle.loadNibNamed(name ?? className, owner: nil, options: nil) ?? []
         return castFirst(allObjects)
+    }
+    
+    public class func fromNib() -> Self? {
+        return fromNibNamed(className)
     }
     
     public func applyContainedViewConstraints() {
