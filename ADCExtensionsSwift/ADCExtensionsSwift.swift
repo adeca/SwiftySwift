@@ -520,18 +520,18 @@ extension RangeReplaceableCollectionType where Generator.Element : Equatable {
 
 // MARK: Sliceable
 
-extension Sliceable {
-    public func dropFirst() -> Self.SubSlice {
+extension CollectionType {
+    public func dropFirst() -> Self.SubSequence {
         return Swift.dropFirst(self)
     }
     
-    public func decompose() -> (Self.Generator.Element, Self.SubSlice)? {
+    public func decompose() -> (Self.Generator.Element, Self.SubSequence)? {
         return first.map { ($0, dropFirst()) }
     }
 }
  
-extension Sliceable where Self.Index : BidirectionalIndexType {
-    public func dropLast() -> Self.SubSlice {
+extension CollectionType where Self.Index : BidirectionalIndexType {
+    public func dropLast() -> Self.SubSequence {
         return Swift.dropLast(self)
     }
 }
