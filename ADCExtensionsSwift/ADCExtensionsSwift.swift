@@ -53,22 +53,26 @@ e.g.
     B.factoryMethod()  // type is inferred as B?
 **/
 
+/// Optional cast of `x` as type `V`
 public func cast<U, V>(x: U) -> V? {
     return x as? V
 }
 
+/// Return all values of `source` that were successfully casted to type `V`
 public func castFilter<S: SequenceType, V>(source: S) -> [V] {
     return source.flatMap {
         $0 as? V
     }
 }
 
+/// Return the first value of `source` that was successfully casted to type `V`
 public func castFirst<S: SequenceType, V>(source: S) -> V? {
     return source.flatMap {
         $0 as? V
     }.first
 }
 
+/// Forced cast of `x` as type `V`
 public func forcedCast<U, V>(x: U) -> V {
     return x as! V
 }
@@ -176,6 +180,24 @@ extension UIImage {
     
     public class func tiledImageNamed(name: String) -> UIImage? {
         return self.init(named: name)?.resizableImageWithCapInsets(UIEdgeInsetsZero)
+    }
+    
+    public class func imageByRenderingView(view: UIView) -> UIImage {
+        let oldAlpha = view.alpha
+        view.alpha = 1
+        let image = imageByRenderingLayer(view.layer)
+        view.alpha = oldAlpha
+        
+        return image
+    }
+    
+    public class func imageByRenderingLayer(layer: CALayer) -> UIImage {
+        UIGraphicsBeginImageContext(layer.bounds.size)
+        layer.renderInContext(UIGraphicsGetCurrentContext())
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext();
+        
+        return image
     }
     
     public func imageWithOrientation(orientation: UIImageOrientation) -> UIImage? {
@@ -442,6 +464,13 @@ extension SequenceType where Self.Generator.Element : OptionalConvertible {
     }
 }
 
+extension SequenceType where Generator.Element : Equatable {
+    /// Return `true` iff all elements of `other` are contained in `self`.
+    public func contains<S: SequenceType where S.Generator.Element == Generator.Element>(other: S) -> Bool {
+        return other.all { self.contains($0) }
+    }
+}
+
 extension SequenceType {
     public func each(@noescape action: (Self.Generator.Element) -> Void) -> Void {
         for element in self {
@@ -460,6 +489,25 @@ extension SequenceType {
             old || predicate(new) 
         }
     }
+
+    /// Return nil is `self` is empty, otherwise return the result of repeatedly 
+    /// calling `combine` with each element of `self`, in turn.
+    /// i.e. return `combine(combine(...combine(combine(self[0], self[1]),
+    /// self[2]),...self[count-2]), self[count-1])`.
+    public func reduce(@noescape combine: (Self.Generator.Element, Self.Generator.Element) -> Self.Generator.Element) -> Self.Generator.Element? {
+        
+        var generator = self.generate()
+        guard let first = generator.next() else { 
+            return nil 
+        }
+        
+        var result = first
+        while let element = generator.next() {
+            result = combine(result, element)
+        }
+        
+        return result
+    }
 }
 
 extension CollectionType {
@@ -471,6 +519,13 @@ extension CollectionType {
 extension CollectionType where Generator.Element : Equatable {
     public func find(element: Self.Generator.Element) -> Self.Generator.Element? {        
         return indexOf(element).map { self[$0] }
+    }
+}
+
+extension CollectionType where Index == Int {
+    public func randomElement() -> Self.Generator.Element {
+        let idx = Int(arc4random_uniform(UInt32(count)))
+        return self[idx]
     }
 }
 
@@ -539,13 +594,15 @@ extension CollectionType where Self.Index : BidirectionalIndexType {
 // MARK: Dictionary
 
 extension Dictionary {
-    mutating func extend<S: SequenceType where S.Generator.Element == Generator.Element>(newElements: S) -> [Value] {
+    /// Update the values stored in the dictionary with the given key-value pairs, or, if a key does not exist, add a new entry.
+    public mutating func extend<S: SequenceType where S.Generator.Element == Generator.Element>(newElements: S) -> [Value] {
         return newElements.flatMap { 
             (k, v) in updateValue(v, forKey: k) 
         }
     }
 }
 
+/// Return a new dictionary created by extending the lef-side dictionary with the elements of the right-side dictionary
 public func + <K, V, S: SequenceType where S.Generator.Element == (K, V)>(lhs: [K: V], rhs: S) -> [K: V] {
     var result = lhs
     result.extend(rhs)
@@ -595,8 +652,16 @@ extension CGPoint {
         )
     }
     
-    public init(_ vector: CGVector) {
-        self.init(x: vector.dx, y: vector.dy)
+    public var length: CGFloat {
+        return sqrt((x * x) + (y * y))
+    }
+    
+    public func distance(point: CGPoint) -> CGFloat {
+        return sqrt(distanceSquared(point))
+    }
+    
+    public func distanceSquared(point: CGPoint) -> CGFloat {
+        return pow((x - point.x), 2) + pow((y - point.y), 2)
     }
 }
 
@@ -610,6 +675,18 @@ extension CGRect {
         let newOrigin = origin.pointByClamping(newRect)
         
         return CGRect(origin: newOrigin, size: size)
+    }
+    
+    public init(origin: CGPoint, width: CGFloat, height: CGFloat) {
+        self.init(x: origin.x, y: origin.y, width: width, height: height)
+    }
+    
+    public init(x: CGFloat, y: CGFloat, size: CGSize) {
+        self.init(x: x, y: y, width: size.width, height: size.height)
+    }
+    
+    public var center: CGPoint {
+        return CGPoint(x: midX, y: midY)
     }
 }
 
@@ -644,6 +721,29 @@ public typealias CGFloatTuple = (CGFloat, CGFloat)
 public protocol CGFloatTupleConvertible {    
     var tuple: CGFloatTuple { get }
     init(tuple: CGFloatTuple)
+    
+    // methods with default implementations
+    init(_ other: CGFloatTupleConvertible)
+}
+
+extension CGFloatTupleConvertible {
+    public init(_ other: CGFloatTupleConvertible) {
+        self.init(tuple: other.tuple)
+    }
+    
+    public func generate() -> AnyGenerator<CGFloat> {
+        return anyGenerator([tuple.0, tuple.1].generate())
+    }
+    
+    public func minElement() -> CGFloat {
+        let t = tuple
+        return min(t.0, t.1)
+    }
+    
+    public func maxElement() -> CGFloat? {
+        let t = tuple
+        return max(t.0, t.1)
+    }
 }
 
 /// Functional methods used to apply transforms to a pair of floats
@@ -691,6 +791,45 @@ public func / <T: CGFloatTupleConvertible>(lhs: T, rhs: CGFloat) -> T {
 }
 public func /= <T: CGFloatTupleConvertible>(inout lhs: T, rhs: CGFloat) {
     lhs = lhs / rhs
+}
+
+public func * <T: CGFloatTupleConvertible, U: CGFloatTupleConvertible>(lhs: T, rhs: U) -> T {
+    return lhs.merge(rhs, *)
+}
+public func *= <T: CGFloatTupleConvertible, U: CGFloatTupleConvertible>(inout lhs: T, rhs: U) {
+    lhs = lhs * rhs
+}
+
+public func / <T: CGFloatTupleConvertible, U: CGFloatTupleConvertible>(lhs: T, rhs: U) -> T {
+    return lhs.merge(rhs, /)
+}
+public func /= <T: CGFloatTupleConvertible, U: CGFloatTupleConvertible>(inout lhs: T, rhs: U) {
+    lhs = lhs / rhs
+}
+
+public func + <T: CGFloatTupleConvertible, U: CGFloatTupleConvertible>(lhs: T, rhs: U) -> T {
+    return lhs.merge(rhs, +)
+}
+public func += <T: CGFloatTupleConvertible, U: CGFloatTupleConvertible>(inout lhs: T, rhs: U) {
+    lhs = lhs + rhs
+}
+
+public func - <T: CGFloatTupleConvertible, U: CGFloatTupleConvertible>(lhs: T, rhs: U) -> T {
+    return lhs.merge(rhs, -)
+}
+public func -= <T: CGFloatTupleConvertible, U: CGFloatTupleConvertible>(inout lhs: T, rhs: U) {
+    lhs = lhs - rhs
+}
+
+public prefix func + <T: CGFloatTupleConvertible>(rhs: T) -> T {
+    return rhs
+}
+public prefix func - <T: CGFloatTupleConvertible>(rhs: T) -> T {
+    return rhs.map { -$0 }
+}
+
+public func abs<T: CGFloatTupleConvertible>(x: T) -> T {
+    return x.map { abs($0) }
 }
 
 /// CGPoint, CGVector and CGSize can be converted to a pair of floats.
