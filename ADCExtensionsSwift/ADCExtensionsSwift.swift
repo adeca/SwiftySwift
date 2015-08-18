@@ -733,10 +733,18 @@ extension CGFloatTupleConvertible {
         return min(t.0, t.1)
     }
     
-    public func maxElement() -> CGFloat? {
+    public func maxElement() -> CGFloat {
         let t = tuple
         return max(t.0, t.1)
     }
+}
+
+public func max(x: CGFloatTupleConvertible) -> CGFloat {
+    return x.maxElement()
+}
+
+public func min(x: CGFloatTupleConvertible) -> CGFloat {
+    return x.minElement()
 }
 
 /// Functional methods used to apply transforms to a pair of floats
