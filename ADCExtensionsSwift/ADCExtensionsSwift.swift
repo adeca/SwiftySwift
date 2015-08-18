@@ -295,13 +295,11 @@ extension UITableView {
     }
     
     public func dequeueReusableCell<T: UITableViewCell>() -> T? {
-        let cell = dequeueReusableCellWithIdentifier(T.cellIdentifier)
-        return cast(cell)
+        return dequeueReusableCellWithIdentifier(T.cellIdentifier) as? T
     }
     
     public func dequeueReusableCellForIndexPath<T: UITableViewCell>(indexPath: NSIndexPath) -> T {
-        let cell = dequeueReusableCellWithIdentifier(T.cellIdentifier, forIndexPath: indexPath)
-        return cast(cell)!
+        return dequeueReusableCellWithIdentifier(T.cellIdentifier, forIndexPath: indexPath) as! T
     }
 }
 
@@ -313,13 +311,11 @@ extension UITableViewCell {
     }
     
     public class func dequeueReusableCellFromTableView(tableView: UITableView) -> Self? {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)
-        return cast(cell)
+        return tableView.dequeueReusableCell()
     }
     
     public class func dequeueReusableCellFromTableView(tableView: UITableView, indexPath: NSIndexPath) -> Self {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
-        return cast(cell)!
+        return tableView.dequeueReusableCellForIndexPath(indexPath)
     }
 }
 
@@ -331,13 +327,8 @@ extension UICollectionView {
         set { collectionViewLayout = newValue }
     }
     
-    public func dequeueReusableCellForIndexPath<T: UICollectionViewCell>(indexPath: NSIndexPath!) -> T! {
-        let cell = dequeueReusableCellWithReuseIdentifier(T.cellIdentifier, forIndexPath: indexPath)
-        return cast(cell)!
-    }
-    
-    public func dequeueReusableCellOfClass<T: UICollectionViewCell>(cellClass: T.Type, forIndexPath indexPath: NSIndexPath!) -> T {
-        return dequeueReusableCellForIndexPath(indexPath)
+    public func dequeueReusableCellForIndexPath<T: UICollectionViewCell>(indexPath: NSIndexPath!) -> T {
+        return dequeueReusableCellWithReuseIdentifier(T.cellIdentifier, forIndexPath: indexPath) as! T
     }
 }
 
@@ -349,9 +340,7 @@ extension UICollectionViewCell {
     }
     
     public class func dequeueReusableCellFromCollectionView(collectionView: UICollectionView, indexPath: NSIndexPath) -> Self {
-
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath)
-        return cast(cell)!
+        return collectionView.dequeueReusableCellForIndexPath(indexPath)
     }
 }
 
@@ -420,8 +409,12 @@ extension UIViewController {
         return fromStoryboard(UIStoryboard(name: name, bundle: nil))
     }
     public class func fromStoryboard(storyboard: UIStoryboard) -> Self? {
-        return cast(fromStoryboard(storyboard, identifier: className))
+        return controllerFromStoryboard(storyboard)
     }
+}
+
+private func controllerFromStoryboard<T: UIViewController>(storyboard: UIStoryboard) -> T? {
+    return T.fromStoryboard(storyboard, identifier: T.className) as? T
 }
 
 // MARK: NSCoding
