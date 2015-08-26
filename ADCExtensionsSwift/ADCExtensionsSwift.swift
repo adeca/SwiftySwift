@@ -193,7 +193,7 @@ extension UIImage {
     
     public class func imageByRenderingLayer(layer: CALayer) -> UIImage {
         UIGraphicsBeginImageContext(layer.bounds.size)
-        layer.renderInContext(UIGraphicsGetCurrentContext())
+        layer.renderInContext(UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext();
         
@@ -445,7 +445,7 @@ public protocol OptionalConvertible {
 }
 
 extension Optional: OptionalConvertible {
-    public var optionalValue: T? { return self }
+    public var optionalValue: Wrapped? { return self }
 }
 
 // MARK: SequenceType
@@ -568,19 +568,9 @@ extension RangeReplaceableCollectionType where Generator.Element : Equatable {
 
 // MARK: Sliceable
 
-extension CollectionType {
-    public func dropFirst() -> Self.SubSequence {
-        return Swift.dropFirst(self)
-    }
-    
+extension CollectionType {    
     public func decompose() -> (Self.Generator.Element, Self.SubSequence)? {
         return first.map { ($0, dropFirst()) }
-    }
-}
- 
-extension CollectionType where Self.Index : BidirectionalIndexType {
-    public func dropLast() -> Self.SubSequence {
-        return Swift.dropLast(self)
     }
 }
 
@@ -661,7 +651,7 @@ extension CGPoint {
 extension CGRect {
     public func rectByClamping(rect: CGRect) -> CGRect {
         if size.width > rect.size.width || size.height > rect.size.height {
-            return CGRect.nullRect
+            return CGRect.null
         }
         
         let newRect = CGRect(origin: rect.origin, size: rect.size - size)
@@ -923,9 +913,9 @@ public func == <T>(lhs: MultiRange<T>, rhs: MultiRange<T>) -> Bool {
 
 private func multiRangeGenerator<T>(rows: Range<T>, _ columns: Range<T>) -> AnyGenerator<(T, T)> {    
     // lazy generators for each row and column
-    var rowGenerators = lazy(rows).map { r in 
-        lazy(columns).map { c 
-            in (r, c) 
+    var rowGenerators = rows.lazy.map { r in 
+        columns.lazy.map { c in 
+            (r, c) 
             }.generate()
         }.generate()
     
