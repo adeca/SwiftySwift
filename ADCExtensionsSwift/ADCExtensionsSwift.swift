@@ -600,10 +600,12 @@ extension SequenceType {
 extension Dictionary {
     public init<S: SequenceType where S.Generator.Element == (Key, Value)>(elements: S) {
         self.init()
-        
-        for (key, value) in elements {
-            updateValue(value, forKey: key)
-        }
+        extend(elements)
+    }
+    
+    public init<C: CollectionType where C.Generator.Element == (Key, Value), C.Index.Distance == Int>(elements: C) {
+        self.init(minimumCapacity: elements.count)
+        extend(elements)
     }
 }
 
