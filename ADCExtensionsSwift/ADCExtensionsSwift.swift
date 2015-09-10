@@ -516,22 +516,23 @@ extension SequenceType where Generator.Element : Equatable {
 }
 
 extension SequenceType {
+    @available(*, deprecated, message="use 'forEach'")
     public func each(@noescape action: (Self.Generator.Element) -> Void) -> Void {
-        for element in self {
-            action(element)
-        } 
+        forEach(action)
     }
     
     public func all(@noescape predicate: (Self.Generator.Element) -> Bool) -> Bool {
-        return reduce(false) { (old, new) in 
-            old && predicate(new) 
+        for element in self {
+            guard predicate(element) else { return false }
         }
+        return true
     }
     
     public func any(@noescape predicate: (Self.Generator.Element) -> Bool) -> Bool {
-        return reduce(false) { (old, new) in 
-            old || predicate(new) 
+        for element in self {
+            if predicate(element) { return true }
         }
+        return false
     }
 
     /// Return nil is `self` is empty, otherwise return the result of repeatedly 
@@ -585,8 +586,11 @@ extension SequenceType {
         let elements = flatMap(transform)
         let keys = Set(elements.map { $0.0 })
         
-        let grouped = keys.map { key in
-            (key, elements.filter{ $0.0 == key }.map { $0.1 })
+        let grouped = keys.map { (key: Key) -> (Key, [Value]) in
+            let keyElements = elements.filter { $0.0 == key }
+            let values = keyElements.map { $0.1 }
+            
+            return (key, values)
         }
         
         return Dictionary(elements: grouped)
