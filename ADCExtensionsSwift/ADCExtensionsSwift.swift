@@ -609,6 +609,56 @@ extension Dictionary {
     }
 }
 
+extension SequenceType {
+    public func mapFirst<T>(@noescape transform: (Self.Generator.Element) -> T?) -> T? {        
+        for value in self {
+            if let result = transform(value) { return result }
+        }
+        return nil
+    }
+    
+    /// Use the given closures to extract the values for comparison. If the values 
+    /// are equal compare using the next closure in the list until they are all exhausted
+    public func minElement(values: ((Self.Generator.Element, Self.Generator.Element) -> NSComparisonResult)...) -> Self.Generator.Element? {
+        return minElement(values)
+    }
+    
+    /// Use the given closures to extract the values for comparison. If the values 
+    /// are equal compare using the next closure in the list until they are all exhausted
+    public func minElement(values: [(Self.Generator.Element, Self.Generator.Element) -> NSComparisonResult]) -> Self.Generator.Element? {
+        guard values.count > 0 else { return nil }
+        return minElement(orderedBefore(values))
+    }
+    
+    /// Use the given closures to extract the values for comparison. If the values 
+    /// are equal compare using the next closure in the list until they are all exhausted
+    public func sort(values: ((Self.Generator.Element, Self.Generator.Element) -> NSComparisonResult)...) -> [Self.Generator.Element] {
+        return sort(values)
+    }
+    
+    /// Use the given closures to extract the values for comparison. If the values 
+    /// are equal compare using the next closure in the list until they are all exhausted
+    public func sort(values: [(Self.Generator.Element, Self.Generator.Element) -> NSComparisonResult]) -> [Self.Generator.Element] {
+        return sort(orderedBefore(values))
+    }
+}
+
+/// Merge a list of comparison blocks into a single block used for sorting a sequence.
+///
+/// Use the given closures to extract the values for comparison. If the values 
+/// are equal compare using the next closure in the list until they are all exhausted
+private func orderedBefore<T>(comparisons: [(T, T) -> NSComparisonResult]) ->  (T, T) -> Bool {
+    return { (lhs, rhs) -> Bool in
+        for compare in comparisons {
+            let result = compare(lhs, rhs)
+            if result != .OrderedSame { 
+                return result == .OrderedAscending 
+            }
+        }
+        return true
+    }
+}
+
 // MARK: CollectionType
 
 extension RangeReplaceableCollectionType {
