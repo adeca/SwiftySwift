@@ -435,6 +435,18 @@ private func controllerFromStoryboard<T: UIViewController>(storyboard: UIStorybo
     return T.fromStoryboard(storyboard, identifier: T.className) as? T
 }
 
+// MARK: NSDate
+
+extension NSDate: Comparable {}
+
+public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.isEqualToDate(rhs)
+}
+
+public func <(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.compare(rhs) == .OrderedAscending
+}
+
 // MARK: NSCoding
 
 extension NSCoding {
