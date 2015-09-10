@@ -801,9 +801,14 @@ extension CGFloatTupleConvertible {
     }
     
     public func merge<T: CGFloatTupleConvertible>(rhs: T, @noescape _ transform: CGFloatTuple -> CGFloat) -> Self {
-        let t0 = self.tuple
-        let t1 = rhs.tuple
+        let (t0, t1) = (self.tuple, rhs.tuple)
         let result = (transform(t0.0, t1.0), transform(t0.1, t1.1))
+        return Self(tuple: result)
+    }
+    
+    public func merge<T: CGFloatTupleConvertible, U: CGFloatTupleConvertible>(a: T, _ b: U, @noescape _ transform: (CGFloat, CGFloat, CGFloat) -> CGFloat) -> Self {
+        let (t0, t1, t2) = (self.tuple, a.tuple, b.tuple)
+        let result = (transform(t0.0, t1.0, t2.0), transform(t0.1, t1.1, t2.1))
         return Self(tuple: result)
     }
 }
@@ -878,6 +883,10 @@ public func abs<T: CGFloatTupleConvertible>(x: T) -> T {
     return x.map { abs($0) }
 }
 
+public func clamp<T: CGFloatTupleConvertible, U: CGFloatTupleConvertible, V: CGFloatTupleConvertible>(x: T, _ low: U, _ high: V) -> T {
+    return x.merge(low, high, clamp)
+}
+
 /// CGPoint, CGVector and CGSize can be converted to a pair of floats.
 /// Conforming to CGFloatTupleConvertible allows using the operators defined above. 
 
@@ -904,6 +913,8 @@ extension CGVector: CGFloatTupleConvertible {
         self.init(dx: tuple.0, dy: tuple.1)
     }
 }
+
+// MARK: MultiRange
 
 /**
 Useful methods to iterate over a grid
