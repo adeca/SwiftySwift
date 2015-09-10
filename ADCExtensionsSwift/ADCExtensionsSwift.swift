@@ -475,6 +475,17 @@ extension Comparable {
     }
 }
 
+// MARK: Optional
+
+extension Optional {
+    /// If `self != nil` executes `f(self!)`.
+    public func unwrap(@noescape f: (Wrapped) throws -> ()) rethrows {
+        if let value = self { 
+            try f(value) 
+        }
+    }
+}
+
 // MARK: OptionalConvertible
 
 /// A type that can be represented as an `Optional`
