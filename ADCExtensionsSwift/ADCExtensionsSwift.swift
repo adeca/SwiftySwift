@@ -680,6 +680,19 @@ public func sign<T: UnsignedIntegerType>(x: T) -> T {
     return x == 0 ? 0 : 1
 }
 
+// MARK: UIGeometry
+
+extension UIEdgeInsets {
+    public var topLeft: CGPoint { 
+        return CGPoint(x: left, y: top) 
+    }
+    public var bottomRight: CGPoint {
+        return CGPoint(x: right, y: bottom) 
+    }
+    
+    public static var zero = UIEdgeInsetsZero
+}
+
 // MARK: CGGeometry
 
 extension CGPoint {
@@ -753,6 +766,8 @@ public func - (lhs: CGRect, rhs: CGVector) -> CGRect {
 public func - (lhs: CGRect, rhs: CGSize) -> CGRect {
     return CGRect(origin: lhs.origin, size: lhs.size - rhs)
 }
+
+// MARK: CGFloatTuple
 
 /// Type that can be serialized to a pair of CGFloat values
 public typealias CGFloatTuple = (CGFloat, CGFloat)
