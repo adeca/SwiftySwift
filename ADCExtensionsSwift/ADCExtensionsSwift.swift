@@ -140,7 +140,6 @@ extension NSThread {
 
 extension UIColor {
     public typealias RGBA = (r: UInt, g: UInt, b: UInt, a: UInt)
-
     public convenience init(rgba: RGBA) {        
         self.init(
             red:   CGFloat(rgba.r)/255.0, 
@@ -148,6 +147,11 @@ extension UIColor {
             blue:  CGFloat(rgba.b)/255.0, 
             alpha: CGFloat(rgba.a)/255.0
         )
+    }
+    
+    public typealias RGB = (r: UInt, g: UInt, b: UInt)
+    public convenience init(rgb: RGB) {
+        self.init(rgba: (rgb.r, rgb.g, rgb.b, 255))
     }
     
     public convenience init(hex: UInt64) {
