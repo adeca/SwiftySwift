@@ -841,14 +841,20 @@ extension CGFloatTupleConvertible {
     }
     
     public func minElement() -> CGFloat {
-        let t = tuple
-        return min(t.0, t.1)
+        return min(self.tuple)
     }
     
     public func maxElement() -> CGFloat {
-        let t = tuple
-        return max(t.0, t.1)
+        return max(self.tuple)
     }
+}
+
+public func min<T : Comparable>(t: (T, T)) -> T {
+    return min(t.0, t.1)
+}
+
+public func max<T : Comparable>(t: (T, T)) -> T {
+    return max(t.0, t.1)
 }
 
 public func max(x: CGFloatTupleConvertible) -> CGFloat {
