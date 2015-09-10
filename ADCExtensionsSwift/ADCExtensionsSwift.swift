@@ -453,6 +453,16 @@ extension NSData {
     }
 }
 
+// MARK: Comparable
+
+extension Comparable {
+    public func compare(other: Self) -> NSComparisonResult {
+        return self < other ? .OrderedAscending : 
+            self == other ? .OrderedSame : 
+            .OrderedDescending
+    }
+}
+
 // MARK: OptionalConvertible
 
 /// A type that can be represented as an `Optional`
