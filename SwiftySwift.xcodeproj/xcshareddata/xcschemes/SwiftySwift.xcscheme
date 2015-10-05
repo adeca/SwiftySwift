@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E34D11DA1B1D032B000816A9"
-               BuildableName = "ADCExtensionsSwift.framework"
-               BlueprintName = "ADCExtensionsSwift"
-               ReferencedContainer = "container:ADCExtensionsSwift.xcodeproj">
+               BuildableName = "SwiftySwift.framework"
+               BlueprintName = "SwiftySwift"
+               ReferencedContainer = "container:SwiftySwift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E34D11E51B1D032B000816A9"
-               BuildableName = "ADCExtensionsSwiftTests.xctest"
-               BlueprintName = "ADCExtensionsSwiftTests"
-               ReferencedContainer = "container:ADCExtensionsSwift.xcodeproj">
+               BuildableName = "SwiftySwiftTests.xctest"
+               BlueprintName = "SwiftySwiftTests"
+               ReferencedContainer = "container:SwiftySwift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E34D11E51B1D032B000816A9"
-               BuildableName = "ADCExtensionsSwiftTests.xctest"
-               BlueprintName = "ADCExtensionsSwiftTests"
-               ReferencedContainer = "container:ADCExtensionsSwift.xcodeproj">
+               BuildableName = "SwiftySwiftTests.xctest"
+               BlueprintName = "SwiftySwiftTests"
+               ReferencedContainer = "container:SwiftySwift.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E34D11DA1B1D032B000816A9"
-            BuildableName = "ADCExtensionsSwift.framework"
-            BlueprintName = "ADCExtensionsSwift"
-            ReferencedContainer = "container:ADCExtensionsSwift.xcodeproj">
+            BuildableName = "SwiftySwift.framework"
+            BlueprintName = "SwiftySwift"
+            ReferencedContainer = "container:SwiftySwift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -79,9 +79,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E34D11DA1B1D032B000816A9"
-            BuildableName = "ADCExtensionsSwift.framework"
-            BlueprintName = "ADCExtensionsSwift"
-            ReferencedContainer = "container:ADCExtensionsSwift.xcodeproj">
+            BuildableName = "SwiftySwift.framework"
+            BlueprintName = "SwiftySwift"
+            ReferencedContainer = "container:SwiftySwift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -97,9 +97,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E34D11DA1B1D032B000816A9"
-            BuildableName = "ADCExtensionsSwift.framework"
-            BlueprintName = "ADCExtensionsSwift"
-            ReferencedContainer = "container:ADCExtensionsSwift.xcodeproj">
+            BuildableName = "SwiftySwift.framework"
+            BlueprintName = "SwiftySwift"
+            ReferencedContainer = "container:SwiftySwift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

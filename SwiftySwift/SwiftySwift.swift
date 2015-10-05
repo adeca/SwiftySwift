@@ -1,6 +1,6 @@
 //
-//  ADCExtensionsSwift.swift
-//  ADCExtensionsSwift
+//  SwiftySwift.swift
+//  SwiftySwift
 //
 //  Created by Agustín de Cabrera on 6/1/15.
 //  Copyright (c) 2015 Agustín de Cabrera. All rights reserved.
