@@ -965,6 +965,10 @@ extension CGPoint {
 }
 
 extension CGRect {
+    public init(_ values: (CGFloat, CGFloat, CGFloat, CGFloat)) {
+        self.init(x: values.0, y: values.1, width: values.2, height: values.3)
+    }
+    
     public func rectByClamping(rect: CGRect) -> CGRect {
         if size.width > rect.size.width || size.height > rect.size.height {
             return CGRect.null
@@ -987,6 +991,17 @@ extension CGRect {
     public var center: CGPoint {
         return CGPoint(x: midX, y: midY)
     }
+}
+
+/// Interpolate between two rects
+public func lerp(from: CGRect, _ to: CGRect, _ progress: Double) -> CGRect {
+    let progress = CGFloat(progress)
+    return CGRect(
+        x: lerp(from.origin.x, to.origin.x, progress),
+        y: lerp(from.origin.y, to.origin.y, progress),
+        width:  lerp(from.size.width,  to.size.width,  progress),
+        height: lerp(from.size.height, to.size.height, progress)
+    )
 }
 
 /// Add the given point to the rect's origin
