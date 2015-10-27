@@ -539,6 +539,37 @@ extension SequenceType where Generator.Element : Equatable {
     public func contains<S: SequenceType where S.Generator.Element == Generator.Element>(other: S) -> Bool {
         return other.all { self.contains($0) }
     }
+    
+    /// Return an `Array` with the elements of self, with all duplicates removed.
+    public func filterDuplicates() -> [Self.Generator.Element] {
+        var result: [Self.Generator.Element] = []
+        for element in self {
+            if !result.contains(element) { result.append(element) }
+        }
+        return result
+    }
+}
+
+extension SequenceType where Generator.Element : Hashable {
+    /// Return `true` iff all elements of `other` are contained in `self`.
+    public func contains<S: SequenceType where S.Generator.Element == Generator.Element>(other: S) -> Bool {
+        let set = Set(self)
+        return other.all { set.contains($0) }
+    }
+    
+    /// Return an `Array` with the elements of self, with all duplicates removed.
+    public func filterDuplicates() -> [Self.Generator.Element] {
+        var result = Array<Generator.Element>()
+        var set    = Set<Generator.Element>()
+        
+        for element in self {
+            if !set.contains(element) { 
+                result.append(element) 
+                set.insert(element)
+            }
+        }
+        return result
+    }
 }
 
 extension SequenceType {
