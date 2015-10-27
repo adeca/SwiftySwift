@@ -162,6 +162,11 @@ extension UIColor {
         
         self.init(rgba: (r, g, b, a))
     }
+    
+    public class func randomColor() -> UIColor {
+        let component = { CGFloat(drand48()) }
+        return UIColor(red: component(), green: component(), blue: component(), alpha: 1.0)
+    }
 }
 
 // MARK: UIImage
