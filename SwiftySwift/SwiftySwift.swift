@@ -748,6 +748,14 @@ extension SequenceType {
         return nil
     }
     
+    /// Returns the first non-nil value obtained by applying `transform` to the elements of `self` in reverse order
+    public func mapLast<T>(@noescape transform: (Self.Generator.Element) -> T?) -> T? {
+        for element in self.lazy.reverse() {
+            if let result = transform(element) { return result }
+        }
+        return nil
+    }
+    
     /// Use the given closures to extract the values for comparison. If the values 
     /// are equal compare using the next closure in the list until they are all exhausted
     public func minElement(values: ((Self.Generator.Element, Self.Generator.Element) -> NSComparisonResult)...) -> Self.Generator.Element? {
@@ -763,6 +771,17 @@ extension SequenceType {
     
     /// Use the given closures to extract the values for comparison. If the values 
     /// are equal compare using the next closure in the list until they are all exhausted
+    public func maxElement(values: ((Self.Generator.Element, Self.Generator.Element) -> NSComparisonResult)...) -> Self.Generator.Element? {
+        return maxElement(values)
+    }
+    
+    /// Use the given closures to extract the values for comparison. If the values 
+    /// are equal compare using the next closure in the list until they are all exhausted
+    public func maxElement(values: [(Self.Generator.Element, Self.Generator.Element) -> NSComparisonResult]) -> Self.Generator.Element? {
+        guard values.count > 0 else { return nil }
+        return maxElement(orderedBefore(values))
+    }
+    
     /// Use the given closures to extract the values for comparison. If the values 
     /// are equal compare using the next closure in the list until they are all exhausted
     public func sort(values: ((Self.Generator.Element, Self.Generator.Element) -> NSComparisonResult)...) -> [Self.Generator.Element] {
