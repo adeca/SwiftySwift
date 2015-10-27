@@ -578,6 +578,7 @@ extension SequenceType {
         forEach(action)
     }
     
+    /// Return `true` if the predicate returns `true` for all elements of `self`
     public func all(@noescape predicate: (Self.Generator.Element) -> Bool) -> Bool {
         for element in self {
             guard predicate(element) else { return false }
@@ -585,6 +586,7 @@ extension SequenceType {
         return true
     }
     
+    /// Return `true` if the predicate returns `true` for any element in `self`
     public func any(@noescape predicate: (Self.Generator.Element) -> Bool) -> Bool {
         for element in self {
             if predicate(element) { return true }
@@ -632,12 +634,26 @@ extension CollectionType where Index == Int {
 }
 
 extension SequenceType {
+    /**
+     Create a dictionary with the results of applying `transform` to the elements 
+     of `self`, using the first tuple component as the key and the second as the value.
+     
+     Returning `nil` will generate no entry for that element. Returning an existing 
+     key will overwrite previous entries.
+     */
     public func mapToDictionary<Key: Hashable, Value>(@noescape transform: (Self.Generator.Element) -> (Key, Value)?) -> [Key: Value] {
-        
         let elements = flatMap(transform)
         return Dictionary(elements: elements)
     }
     
+    /**
+     Create a dictionary of arrays based on the results of applying `transform` 
+     to the elements of `self`. The first tuple component is used as key and the 
+     second is added into an array containing all results that share the same key, 
+     which is used as the value.
+     
+     Returning `nil` will generate no entry for that element.
+     */
     public func group<Key: Hashable, Value>(@noescape transform: (Self.Generator.Element) -> (Key, Value)?) -> [Key: [Value]] {
         
         let elements = flatMap(transform)
@@ -667,6 +683,7 @@ extension Dictionary {
 }
 
 extension SequenceType {
+    /// Returns the first non-nil value obtained by applying `transform` to the elements of `self`
     public func mapFirst<T>(@noescape transform: (Self.Generator.Element) -> T?) -> T? {        
         for value in self {
             if let result = transform(value) { return result }
@@ -687,6 +704,8 @@ extension SequenceType {
         return minElement(orderedBefore(values))
     }
     
+    /// Use the given closures to extract the values for comparison. If the values 
+    /// are equal compare using the next closure in the list until they are all exhausted
     /// Use the given closures to extract the values for comparison. If the values 
     /// are equal compare using the next closure in the list until they are all exhausted
     public func sort(values: ((Self.Generator.Element, Self.Generator.Element) -> NSComparisonResult)...) -> [Self.Generator.Element] {
