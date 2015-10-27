@@ -1034,6 +1034,23 @@ public func - (lhs: CGRect, rhs: CGSize) -> CGRect {
     return CGRect(origin: lhs.origin, size: lhs.size - rhs)
 }
 
+/// Multiply the rect's origin and size by the given value
+public func * <U: CGFloatTupleConvertible>(lhs: CGRect, rhs: U) -> CGRect {
+    return CGRect(origin: lhs.origin * rhs, size: lhs.size * rhs)
+}
+/// Multiply the rect's origin and size by the given value
+public func *= <U: CGFloatTupleConvertible>(inout lhs: CGRect, rhs: U) {
+    lhs = lhs * rhs
+}
+/// Multiply the rect's origin and size by the given value
+public func * (lhs: CGRect, rhs: CGFloat) -> CGRect {
+    return CGRect(origin: lhs.origin * rhs, size: lhs.size * rhs)
+}
+/// Multiply the rect's origin and size by the given value
+public func *= (inout lhs: CGRect, rhs: CGFloat) {
+    lhs = lhs * rhs
+}
+
 // MARK: CGFloatTuple
 
 /// Type that can be serialized to a pair of CGFloat values
