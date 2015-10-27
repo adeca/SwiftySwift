@@ -647,6 +647,19 @@ extension SequenceType {
     }
     
     /**
+     Create a dictionary with the results of applying `transform` to the elements 
+     of `self`, using the returned value as the key and the element as the value.
+     
+     Returning `nil` will generate no entry for that element. Returning an existing 
+     key will overwrite previous entries.
+     */
+    public func mapToDictionary<Key: Hashable>(@noescape transform: (Self.Generator.Element) -> Key?) -> [Key: Self.Generator.Element] {
+        return mapToDictionary { value in
+            transform(value).map({ ($0, value) })
+        }
+    }
+    
+    /**
      Create a dictionary of arrays based on the results of applying `transform` 
      to the elements of `self`. The first tuple component is used as key and the 
      second is added into an array containing all results that share the same key, 
@@ -667,6 +680,50 @@ extension SequenceType {
         }
         
         return Dictionary(elements: grouped)
+    }
+    
+    /**
+     Create a dictionary of arrays based on the results of applying `transform` 
+     to the elements of `self`. The returned value is used as key and the corresponding 
+     element is added into an array containing all results that share the same key, 
+     which is used as the value.
+     
+     Returning `nil` will generate no entry for that element.
+     */
+    public func group<Key: Hashable>(@noescape transform: (Self.Generator.Element) -> Key?) -> [Key: [Self.Generator.Element]] {
+        return group { value in
+            transform(value).map({ ($0, value) })
+        }
+    }
+    
+    /**
+     Create an array of arrays based on the results of applying `transform` 
+     to the elements of `self`. The first tuple component is used as the key to 
+     group the results, and the second is added into an array containing all results 
+     that share the same key.
+     
+     Returning `nil` will generate no entry for that element.
+     */
+    public func groupValues<Key: Equatable, Value>(@noescape transform: (Self.Generator.Element) -> (Key, Value)?) -> [[Value]] {
+        let elements = flatMap(transform)
+        let keys = elements.map { $0.0 }.filterDuplicates()
+        return keys.map { key in
+            elements.filter { $0.0 == key }.map { $0.1 }
+        }
+    }
+    
+    /**
+     Create an array of arrays based on the results of applying `transform` 
+     to the elements of `self`.The returned value is used as the key to 
+     group the results, and corresponding element is added into an array containing 
+     all results that share the same key.
+     
+     Returning `nil` will generate no entry for that element.
+     */
+    public func groupValues<Key: Equatable>(@noescape transform: (Self.Generator.Element) -> Key?) -> [[Self.Generator.Element]] {
+        return groupValues { value in
+            transform(value).map({ ($0, value) })
+        }
     }
 }
 
