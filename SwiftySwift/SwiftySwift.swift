@@ -319,6 +319,10 @@ extension UITableView {
     public func dequeueReusableCellForIndexPath<T: UITableViewCell>(indexPath: NSIndexPath) -> T {
         return dequeueReusableCellWithIdentifier(T.cellIdentifier, forIndexPath: indexPath) as! T
     }
+    
+    public func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>() -> T? {
+        return dequeueReusableHeaderFooterViewWithIdentifier(T.defaultIdentifier) as? T
+    }
 }
 
 // MARK: UITableViewCell
@@ -359,6 +363,23 @@ extension UICollectionViewCell {
     
     public class func dequeueReusableCellFromCollectionView(collectionView: UICollectionView, indexPath: NSIndexPath) -> Self {
         return collectionView.dequeueReusableCellForIndexPath(indexPath)
+    }
+}
+
+// MARK: UITableViewHeaderFooterView
+
+extension UITableViewHeaderFooterView {
+    public static var defaultIdentifier: String {
+        return className
+    }
+    
+    public class func dequeueFromTableView(tableView: UITableView) -> Self? {
+        return tableView.dequeueReusableHeaderFooterView()
+    }
+    
+    public class func registerNibInTableView(tableView: UITableView, bundle: NSBundle? = nil) {
+        let nib = UINib(nibName: defaultIdentifier, bundle: bundle)
+        tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: defaultIdentifier)
     }
 }
 
