@@ -11,6 +11,10 @@
 		E34D11E71B1D032B000816A9 /* SwiftySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E34D11DB1B1D032B000816A9 /* SwiftySwift.framework */; };
 		E34D11EE1B1D032B000816A9 /* SwiftySwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D11ED1B1D032B000816A9 /* SwiftySwiftTests.swift */; };
 		E34D11F81B1D0355000816A9 /* SwiftySwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D11F71B1D0355000816A9 /* SwiftySwift.swift */; };
+		E3A5D2621BE040D7002067C2 /* SwiftyUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5D2611BE040D7002067C2 /* SwiftyUIKit.swift */; };
+		E3A5D2641BE041FD002067C2 /* SwiftyGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5D2631BE041FD002067C2 /* SwiftyGeometry.swift */; };
+		E3A5D2661BE042D3002067C2 /* MultiRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5D2651BE042D3002067C2 /* MultiRange.swift */; };
+		E3B914DF1BD6CDE100956EF3 /* SwiftyCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B914DE1BD6CDE100956EF3 /* SwiftyCocoa.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +35,11 @@
 		E34D11EC1B1D032B000816A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E34D11ED1B1D032B000816A9 /* SwiftySwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftySwiftTests.swift; sourceTree = "<group>"; };
 		E34D11F71B1D0355000816A9 /* SwiftySwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftySwift.swift; sourceTree = "<group>"; };
+		E3A5D2611BE040D7002067C2 /* SwiftyUIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyUIKit.swift; sourceTree = "<group>"; };
+		E3A5D2631BE041FD002067C2 /* SwiftyGeometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyGeometry.swift; sourceTree = "<group>"; };
+		E3A5D2651BE042D3002067C2 /* MultiRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiRange.swift; sourceTree = "<group>"; };
+		E3A5D2671BE04374002067C2 /* SwiftySwift.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftySwift.podspec; sourceTree = SOURCE_ROOT; };
+		E3B914DE1BD6CDE100956EF3 /* SwiftyCocoa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyCocoa.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +85,10 @@
 				E34D11E01B1D032B000816A9 /* SwiftySwift.h */,
 				E34D11DE1B1D032B000816A9 /* Supporting Files */,
 				E34D11F71B1D0355000816A9 /* SwiftySwift.swift */,
+				E3B914DE1BD6CDE100956EF3 /* SwiftyCocoa.swift */,
+				E3A5D2611BE040D7002067C2 /* SwiftyUIKit.swift */,
+				E3A5D2631BE041FD002067C2 /* SwiftyGeometry.swift */,
+				E3A5D2651BE042D3002067C2 /* MultiRange.swift */,
 			);
 			path = SwiftySwift;
 			sourceTree = "<group>";
@@ -83,6 +96,7 @@
 		E34D11DE1B1D032B000816A9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E3A5D2671BE04374002067C2 /* SwiftySwift.podspec */,
 				E34D11DF1B1D032B000816A9 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -214,6 +228,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E34D11F81B1D0355000816A9 /* SwiftySwift.swift in Sources */,
+				E3A5D2661BE042D3002067C2 /* MultiRange.swift in Sources */,
+				E3A5D2641BE041FD002067C2 /* SwiftyGeometry.swift in Sources */,
+				E3A5D2621BE040D7002067C2 /* SwiftyUIKit.swift in Sources */,
+				E3B914DF1BD6CDE100956EF3 /* SwiftyCocoa.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
