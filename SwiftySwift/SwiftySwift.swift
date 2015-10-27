@@ -928,6 +928,10 @@ public func sign<T: UnsignedIntegerType>(x: T) -> T {
     return x == 0 ? 0 : 1
 }
 
+public func mod(lhs: Int, _ rhs: Int) -> Int {
+    return (lhs % rhs + rhs) % rhs
+}
+
 // MARK: UIGeometry
 
 extension UIEdgeInsets {
