@@ -43,7 +43,7 @@ public struct MultiRange<T: ForwardIndexType> : Equatable, SequenceType, CustomS
     }
     
     public func contains(element: (T, T)) -> Bool {
-        return any { $0 == element }
+        return contains { $0 == element.0 && $1 == element.1 }
     }
     
     public func underestimateCount() -> Int {
