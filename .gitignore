@@ -1,3 +1,4 @@
 SwiftySwift.xcodeproj/xcuserdata
 *.xccheckout
 Carthage/Build
+DerivedData

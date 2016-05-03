@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Agustín de Cabrera. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 //! Project version number for SwiftySwift.
 FOUNDATION_EXPORT double SwiftySwiftVersionNumber;
