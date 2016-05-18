@@ -72,7 +72,7 @@ private func multiRangeGenerator<T>(rows: Range<T>, _ columns: Range<T>) -> AnyG
         }.generate()
     
     var current = rowGenerators.next()
-    return anyGenerator {
+    return AnyGenerator() {
         if let next = current?.next() {
             return next
         } else {

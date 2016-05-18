@@ -11,25 +11,25 @@ Pod::Spec.new do |s|
   s.ios.deployment_target 	= "8.0"
 
   s.subspec 'Core' do |sub|
-    sub.source_files = 'SwiftySwift/SwiftySwift.swift'
+    sub.source_files = 'SwiftyCore/*.swift'
   end
 
   s.subspec 'Cocoa' do |sub|
-    sub.source_files = 'SwiftySwift/SwiftyCocoa.swift'
+    sub.source_files = 'SwiftyCocoa/*.swift'
     sub.dependency 'SwiftySwift/Core'
   end
 
   s.subspec 'Geometry' do |sub|
-    sub.source_files = 'SwiftySwift/SwiftyGeometry.swift'
+    sub.source_files = 'SwiftyGeometry/*.swift'
     sub.dependency 'SwiftySwift/Core'
   end
 
   s.subspec 'UIKit' do |sub|
-    sub.source_files = 'SwiftySwift/SwiftyUIKit.swift'
+    sub.source_files = 'SwiftyUIKit/*.swift'
     sub.dependency 'SwiftySwift/Cocoa'
   end
 
   s.subspec 'MultiRange' do |sub|
-    sub.source_files = 'SwiftySwift/MultiRange.swift'
+    sub.source_files = 'MultiRange/*.swift'
   end
 end
