@@ -41,8 +41,10 @@ extension UIImage {
     
     public class func imageByRenderingLayer(layer: CALayer) -> UIImage {
         UIGraphicsBeginImageContext(layer.bounds.size)
-        layer.renderInContext(UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        let context = UIGraphicsGetCurrentContext()!
+        layer.renderInContext(context)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext();
         
         return image
@@ -51,12 +53,11 @@ extension UIImage {
     public class func imageWithColor(color: UIColor) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContext(rect.size)
-        
-        let context = UIGraphicsGetCurrentContext()
+        let context = UIGraphicsGetCurrentContext()!
         CGContextSetFillColorWithColor(context, color.CGColor)
         CGContextFillRect(context, rect)
         
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
         return image
