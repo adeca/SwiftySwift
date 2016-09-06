@@ -11,9 +11,9 @@ import UIKit
 // MARK: - UIFont
 
 extension UIFont {
-    public func fontWithSymbolicTraits(symbolicTraits: UIFontDescriptorSymbolicTraits) -> UIFont {
-        let currentDescriptor = fontDescriptor()
-        let descriptor = currentDescriptor.fontDescriptorWithSymbolicTraits(symbolicTraits) ?? currentDescriptor
+    public func fontWithSymbolicTraits(_ symbolicTraits: UIFontDescriptorSymbolicTraits) -> UIFont {
+        let currentDescriptor = fontDescriptor
+        let descriptor = currentDescriptor.withSymbolicTraits(symbolicTraits) ?? currentDescriptor
         return UIFont(descriptor: descriptor, size: 0)
     }
 }

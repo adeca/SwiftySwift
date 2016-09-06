@@ -17,14 +17,13 @@ extension UIView {
         }
     }
     
-    public class func fromNibNamed(name: String) -> Self? {  
-        let bundle = NSBundle.mainBundle()
-        let allObjects = bundle.loadNibNamed(name ?? className, owner: nil, options: nil) ?? []
+    public class func fromNib(named name: String) -> Self? {  
+        let allObjects = Bundle.main.loadNibNamed(name, owner: nil, options: nil) ?? []
         return castFirst(allObjects)
     }
     
     public class func fromNib() -> Self? {
-        return fromNibNamed(className)
+        return fromNib(named: className)
     }
     
     public func applyContainedViewConstraints() {
@@ -36,14 +35,14 @@ extension UIView {
         let views = ["self": self]
         let formats = ["V:|[self]|", "H:|[self]|"]
         
-        return NSLayoutConstraint.constraintsWithVisualFormats(formats, options: [], metrics: nil, views: views)
+        return NSLayoutConstraint.constraints(withVisualFormats: formats, options: [], metrics: nil, views: views)
     }
     
-    public func containedViewConstraintsWithHeight(height: CGFloat) -> [NSLayoutConstraint] {
+    public func containedViewConstraints(withHeight height: CGFloat) -> [NSLayoutConstraint] {
         let views = ["self": self]
         let metrics = ["height": height]
         let formats = ["V:|[self(height)]", "H:|[self]|"]
         
-        return NSLayoutConstraint.constraintsWithVisualFormats(formats, options: [], metrics: metrics, views: views)
+        return NSLayoutConstraint.constraints(withVisualFormats: formats, options: [], metrics: metrics, views: views)
     }
 }

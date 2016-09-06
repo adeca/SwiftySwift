@@ -11,7 +11,7 @@ import CoreGraphics
 // MARK: - CGPoint
 
 extension CGPoint {
-    public func pointByClamping(rect: CGRect) -> CGPoint {
+    public func clamped(to rect: CGRect) -> CGPoint {
         return CGPoint(
             x: clamp(x, rect.minX, rect.maxX), 
             y: clamp(y, rect.minY, rect.maxY)
@@ -22,11 +22,12 @@ extension CGPoint {
         return sqrt((x * x) + (y * y))
     }
     
-    public func distance(point: CGPoint) -> CGFloat {
-        return sqrt(distanceSquared(point))
+    public func distance(to point: CGPoint) -> CGFloat {
+        return sqrt(distanceSquared(to: point))
     }
     
-    public func distanceSquared(point: CGPoint) -> CGFloat {
-        return pow((x - point.x), 2) + pow((y - point.y), 2)
+    public func distanceSquared(to point: CGPoint) -> CGFloat {
+        return ((x - point.x) * (x - point.x)) + 
+            ((y - point.y) * (y - point.y))
     }
 }

@@ -17,6 +17,4 @@ extension UIEdgeInsets {
     public var bottomRight: CGPoint {
         return CGPoint(x: right, y: bottom) 
     }
-    
-    public static var zero: UIEdgeInsets = UIEdgeInsetsZero
 }

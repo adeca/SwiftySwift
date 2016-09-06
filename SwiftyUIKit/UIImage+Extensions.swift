@@ -11,26 +11,27 @@ import UIKit
 // MARK: - UIImage
 
 extension UIImage {
-    private static let imagesCache = NSCache()
+    private static let imagesCache = NSCache<NSString, UIImage>()
     
     public class func cachedImage(contentsOfFile path: String) -> UIImage? {
-        if let cached = imagesCache.objectForKey(path) as? UIImage {
+        let cacheKey = path as NSString
+        if let cached = imagesCache.object(forKey: cacheKey) {
             return cached
         }
         
         if let image = UIImage(contentsOfFile: path) {
-            imagesCache.setObject(image, forKey: path)
+            imagesCache.setObject(image, forKey: cacheKey)
             return image
         }
         
         return nil
     }
     
-    public class func tiledImageNamed(name: String) -> UIImage? {
-        return self.init(named: name)?.resizableImageWithCapInsets(UIEdgeInsetsZero)
+    public class func tiledImage(named name: String) -> UIImage? {
+        return self.init(named: name)?.resizableImage(withCapInsets: .zero)
     }
     
-    public class func imageByRenderingView(view: UIView) -> UIImage {
+    public class func imageByRenderingView(_ view: UIView) -> UIImage {
         let oldAlpha = view.alpha
         view.alpha = 1
         let image = imageByRenderingLayer(view.layer)
@@ -39,10 +40,12 @@ extension UIImage {
         return image
     }
     
-    public class func imageByRenderingLayer(layer: CALayer) -> UIImage {
+    //TODO: use context APIs
+    
+    public class func imageByRenderingLayer(_ layer: CALayer) -> UIImage {
         UIGraphicsBeginImageContext(layer.bounds.size)
         let context = UIGraphicsGetCurrentContext()!
-        layer.renderInContext(context)
+        layer.render(in: context)
         
         let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext();
@@ -50,12 +53,12 @@ extension UIImage {
         return image
     }
     
-    public class func imageWithColor(color: UIColor) -> UIImage {
+    public class func image(withColor color: UIColor) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()!
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextFillRect(context, rect)
+        context.setFillColor(color.cgColor)
+        context.fill(rect)
         
         let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
@@ -63,22 +66,22 @@ extension UIImage {
         return image
     }
     
-    public func imageWithOrientation(orientation: UIImageOrientation) -> UIImage? {
-        if let cgImage = CGImage {
-            return UIImage(CGImage: cgImage, scale: scale, orientation: orientation)
-        } else if let ciImage = CIImage {
-            return UIImage(CIImage: ciImage, scale: scale, orientation: orientation)
+    public func image(withOrientation orientation: UIImageOrientation) -> UIImage? {
+        if let cgImage = self.cgImage {
+            return UIImage(cgImage: cgImage, scale: scale, orientation: orientation)
+        } else if let ciImage = self.ciImage {
+            return UIImage(ciImage: ciImage, scale: scale, orientation: orientation)
         } else {
             return nil
         }
     }
     
-    public func verticallyMirroredImage() -> UIImage? {
-        return imageWithOrientation(imageOrientation.verticallyMirrored)
+    public func verticallyMirrored() -> UIImage? {
+        return image(withOrientation: imageOrientation.verticallyMirrored)
     }
     
-    public func horizontallyMirroredImage() -> UIImage? {
-        return imageWithOrientation(imageOrientation.horizontallyMirrored)
+    public func horizontallyMirrored() -> UIImage? {
+        return image(withOrientation: imageOrientation.horizontallyMirrored)
     }
 }
 
@@ -87,27 +90,27 @@ extension UIImage {
 extension UIImageOrientation {
     public var verticallyMirrored: UIImageOrientation {
         switch (self) {
-        case .Up:            return .DownMirrored;
-        case .Down:          return .UpMirrored;
-        case .Left:          return .LeftMirrored;
-        case .Right:         return .RightMirrored;
-        case .UpMirrored:    return .Down;
-        case .DownMirrored:  return .Up;
-        case .LeftMirrored:  return .Left;
-        case .RightMirrored: return .Right;
+        case .up:            return .downMirrored;
+        case .down:          return .upMirrored;
+        case .left:          return .leftMirrored;
+        case .right:         return .rightMirrored;
+        case .upMirrored:    return .down;
+        case .downMirrored:  return .up;
+        case .leftMirrored:  return .left;
+        case .rightMirrored: return .right;
         }
     }
     
     public var horizontallyMirrored: UIImageOrientation {
         switch (self) {
-        case .Up:            return .UpMirrored;
-        case .Down:          return .DownMirrored;
-        case .Left:          return .RightMirrored;
-        case .Right:         return .LeftMirrored;
-        case .UpMirrored:    return .Up;
-        case .DownMirrored:  return .Down;
-        case .LeftMirrored:  return .Right;
-        case .RightMirrored: return .Left;
+        case .up:            return .upMirrored;
+        case .down:          return .downMirrored;
+        case .left:          return .rightMirrored;
+        case .right:         return .leftMirrored;
+        case .upMirrored:    return .up;
+        case .downMirrored:  return .down;
+        case .leftMirrored:  return .right;
+        case .rightMirrored: return .left;
         }
     }
 }

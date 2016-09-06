@@ -16,18 +16,18 @@ extension UICollectionView {
         set { collectionViewLayout = newValue }
     }
     
-    public func numberOfItems() -> Int {
-        return (0..<(numberOfSections())).reduce(0) {
-            $0 + numberOfItemsInSection($1)
+    public var numberOfItems: Int {
+        return (0..<numberOfSections).reduce(0) {
+            $0 + self.numberOfItems(inSection: $1)
         }
     }
     
-    public func dequeueReusableCellForIndexPath<T: UICollectionViewCell>(indexPath: NSIndexPath!) -> T {
-        return dequeueReusableCellWithReuseIdentifier(T.cellIdentifier, forIndexPath: indexPath) as! T
+    public func dequeueReusableCell<T: UICollectionViewCell>(forIndexPath indexPath: IndexPath) -> T {
+        return dequeueReusableCell(withReuseIdentifier: T.cellIdentifier, for: indexPath) as! T
     }
     
-    public func dequeueReusableSupplementaryViewOfKind<T: UICollectionReusableView>(elementKind: String, forIndexPath indexPath: NSIndexPath) -> T {
-        return dequeueReusableSupplementaryViewOfKind(elementKind, withReuseIdentifier: T.className, forIndexPath: indexPath) as! T
+    public func dequeueReusableSupplementaryView<T: UICollectionReusableView>(ofKind elementKind: String, forIndexPath indexPath: IndexPath) -> T {
+        return dequeueReusableSupplementaryView(ofKind: elementKind, withReuseIdentifier: T.className, for: indexPath) as! T
     }
 }
 
@@ -38,7 +38,7 @@ extension UICollectionViewCell {
         return className
     }
     
-    public class func dequeueReusableCellFromCollectionView(collectionView: UICollectionView, indexPath: NSIndexPath) -> Self {
-        return collectionView.dequeueReusableCellForIndexPath(indexPath)
+    public class func dequeueReusableCell(fromCollectionView collectionView: UICollectionView, indexPath: IndexPath) -> Self {
+        return collectionView.dequeueReusableCell(forIndexPath: indexPath)
     }
 }

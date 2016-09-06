@@ -8,13 +8,13 @@
 
 // MARK: - StringLiteralConvertible
 
-extension StringLiteralConvertible where StringLiteralType == ExtendedGraphemeClusterLiteralType {
+extension ExpressibleByStringLiteral where StringLiteralType == ExtendedGraphemeClusterLiteralType {
     public init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType) {
         self.init(stringLiteral: value)
     }
 }
 
-extension StringLiteralConvertible where StringLiteralType == UnicodeScalarLiteralType {
+extension ExpressibleByStringLiteral where StringLiteralType == UnicodeScalarLiteralType {
     public init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
         self.init(stringLiteral: value)
     }

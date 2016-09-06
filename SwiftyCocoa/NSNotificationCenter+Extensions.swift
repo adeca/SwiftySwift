@@ -10,8 +10,8 @@ import Foundation
 
 // MARK: - NSNotificationCenter
 
-extension NSNotificationCenter {
-    public func addObserverForName(name: String?, object: AnyObject? = nil, usingBlock block: (NSNotification) -> Void) -> NSObjectProtocol {
-        return addObserverForName(name, object: object, queue: nil, usingBlock: block)
+extension NotificationCenter {
+    public func addObserver(forName name: NSNotification.Name?, object: Any? = nil, using block: @escaping (Notification) -> Void) -> NSObjectProtocol {
+        return addObserver(forName: name, object: object, queue: nil, using: block)
     }
 }

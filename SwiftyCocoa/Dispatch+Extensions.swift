@@ -8,23 +8,31 @@
 
 import Foundation
 
+extension DispatchQueue {
+    public func asyncAfter(delay: TimeInterval, 
+                           qos: DispatchQoS = .unspecified, 
+                           flags: DispatchWorkItemFlags = [], 
+                           execute work: @escaping @convention(block) () -> Void) {
+        asyncAfter(deadline: .now() + delay, qos: qos, flags: flags, execute: work)
+    }
+}
+
 // MARK: - dispatch
 
 /// Submits a block for asynchronous execution on a global queue with the given identifier
-public func dispatch_async(identifier: Int, _ block: dispatch_block_t) {
-    dispatch_async(dispatch_get_global_queue(identifier, 0), block)
+public func async(_ priority: DispatchQueue.GlobalQueuePriority, execute block: @escaping () -> Void) {
+    DispatchQueue.global(priority: priority).async(execute: block)
 }
 /// Submits a block for asynchronous execution on the main queue
-public func dispatch_async(block: dispatch_block_t) {
-    dispatch_async(dispatch_get_main_queue(), block)
+public func async(execute block: @escaping ()->()) {
+    DispatchQueue.main.async(execute: block)
 }
 
-/// Enqueue a block for execution at the specified time (given in seconds)
-public func dispatch_after(delay: NSTimeInterval, _ queue: dispatch_queue_t, _ block: dispatch_block_t) {
-    let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * NSTimeInterval(NSEC_PER_SEC)))
-    dispatch_after(time, queue, block)
+/// Enqueue a block for execution on the main queue at the specified time (given in seconds)
+public func asyncAfter(delay: TimeInterval, priority: DispatchQueue.GlobalQueuePriority, execute block: @escaping @convention(block) () -> Void) {
+    DispatchQueue.global(priority: priority).asyncAfter(delay: delay, execute: block)
 }
 /// Enqueue a block for execution on the main queue at the specified time (given in seconds)
-public func dispatch_after(delay: NSTimeInterval, _ block: dispatch_block_t) {
-    dispatch_after(delay, dispatch_get_main_queue(), block)
+public func asyncAfter(delay: TimeInterval, execute block: @escaping @convention(block) () -> Void) {
+    DispatchQueue.main.asyncAfter(delay: delay, execute: block)
 }

@@ -53,8 +53,6 @@
 		E3D96D5B1CECF6D100D58C9E /* NSThread+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D591CECF6D100D58C9E /* NSThread+Extensions.swift */; };
 		E3D96D5D1CECF6EC00D58C9E /* NSLayoutConstraint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D5C1CECF6EC00D58C9E /* NSLayoutConstraint+Extensions.swift */; };
 		E3D96D5E1CECF6EC00D58C9E /* NSLayoutConstraint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D5C1CECF6EC00D58C9E /* NSLayoutConstraint+Extensions.swift */; };
-		E3D96D601CECF70400D58C9E /* NSDate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D5F1CECF70400D58C9E /* NSDate+Extensions.swift */; };
-		E3D96D611CECF70400D58C9E /* NSDate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D5F1CECF70400D58C9E /* NSDate+Extensions.swift */; };
 		E3D96D631CECF72F00D58C9E /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D621CECF72F00D58C9E /* NSAttributedString+Extensions.swift */; };
 		E3D96D641CECF72F00D58C9E /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D621CECF72F00D58C9E /* NSAttributedString+Extensions.swift */; };
 		E3D96D661CECF74200D58C9E /* NSNotificationCenter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D651CECF74200D58C9E /* NSNotificationCenter+Extensions.swift */; };
@@ -200,7 +198,6 @@
 		E3D96D561CECF6B800D58C9E /* NSObject+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extensions.swift"; sourceTree = "<group>"; };
 		E3D96D591CECF6D100D58C9E /* NSThread+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSThread+Extensions.swift"; sourceTree = "<group>"; };
 		E3D96D5C1CECF6EC00D58C9E /* NSLayoutConstraint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extensions.swift"; sourceTree = "<group>"; };
-		E3D96D5F1CECF70400D58C9E /* NSDate+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extensions.swift"; sourceTree = "<group>"; };
 		E3D96D621CECF72F00D58C9E /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		E3D96D651CECF74200D58C9E /* NSNotificationCenter+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSNotificationCenter+Extensions.swift"; sourceTree = "<group>"; };
 		E3D96D681CECF77300D58C9E /* Dispatch+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dispatch+Extensions.swift"; sourceTree = "<group>"; };
@@ -282,7 +279,6 @@
 				E3D96D561CECF6B800D58C9E /* NSObject+Extensions.swift */,
 				E3D96D591CECF6D100D58C9E /* NSThread+Extensions.swift */,
 				E3D96D5C1CECF6EC00D58C9E /* NSLayoutConstraint+Extensions.swift */,
-				E3D96D5F1CECF70400D58C9E /* NSDate+Extensions.swift */,
 				E3D96D621CECF72F00D58C9E /* NSAttributedString+Extensions.swift */,
 				E3D96D651CECF74200D58C9E /* NSNotificationCenter+Extensions.swift */,
 				E3D96D681CECF77300D58C9E /* Dispatch+Extensions.swift */,
@@ -731,7 +727,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3D96D611CECF70400D58C9E /* NSDate+Extensions.swift in Sources */,
 				E3D96D641CECF72F00D58C9E /* NSAttributedString+Extensions.swift in Sources */,
 				E3D96D5E1CECF6EC00D58C9E /* NSLayoutConstraint+Extensions.swift in Sources */,
 				E3D96D581CECF6B800D58C9E /* NSObject+Extensions.swift in Sources */,
@@ -799,7 +794,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3D96D601CECF70400D58C9E /* NSDate+Extensions.swift in Sources */,
 				E3D96D871CECF9F600D58C9E /* IntegerArithmeticType+Extensions.swift in Sources */,
 				E3D96D3C1CECF19500D58C9E /* UIImageView+Extensions.swift in Sources */,
 				E3D96D781CECF91300D58C9E /* Dictionary+Extensions.swift in Sources */,
@@ -915,7 +909,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adc.SwiftyCocoa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -934,7 +928,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adc.SwiftyCocoa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -954,7 +948,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adc.SwiftyCore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -973,7 +967,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adc.SwiftyCore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -993,7 +987,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adc.SwiftyGeometry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1012,7 +1006,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adc.SwiftyGeometry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1034,7 +1028,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1054,7 +1048,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adc.SwiftyUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1077,7 +1071,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1098,7 +1092,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1209,7 +1203,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1229,7 +1223,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adc.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1245,7 +1239,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adc.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1257,7 +1251,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adc.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

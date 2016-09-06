@@ -10,7 +10,7 @@
 
 extension Optional {
     /// If `self != nil` executes `f(self!)`.
-    public func unwrap(@noescape f: (Wrapped) throws -> ()) rethrows {
+    public func unwrap(_ f: (Wrapped) throws -> ()) rethrows {
         if let value = self { 
             try f(value) 
         }

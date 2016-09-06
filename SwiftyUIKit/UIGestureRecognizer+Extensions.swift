@@ -17,8 +17,8 @@ extension UIGestureRecognizer {
     
     public func cancel() { 
         // used to clear pending gestures
-        enabled = false
-        enabled = true
+        isEnabled = false
+        isEnabled = true
     }
 }
 

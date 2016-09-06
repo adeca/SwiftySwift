@@ -11,21 +11,21 @@ import UIKit
 // MARK: - UIViewController
 
 extension UIViewController {
-    public class func fromStoryboardNamed(name: String, identifier: String) -> UIViewController? {
+    public class func fromStoryboard(named name: String, identifier: String) -> UIViewController? {
         return fromStoryboard(UIStoryboard(name: name, bundle: nil), identifier: identifier)
     }
-    public class func fromStoryboard(storyboard: UIStoryboard, identifier: String) -> UIViewController? {
-        return storyboard.instantiateViewControllerWithIdentifier(identifier)
+    public class func fromStoryboard(_ storyboard: UIStoryboard, identifier: String) -> UIViewController? {
+        return storyboard.instantiateViewController(withIdentifier: identifier)
     }
     
-    public class func fromStoryboardNamed(name: String) -> Self? {
+    public class func fromStoryboard(named name: String) -> Self? {
         return fromStoryboard(UIStoryboard(name: name, bundle: nil))
     }
-    public class func fromStoryboard(storyboard: UIStoryboard) -> Self? {
+    public class func fromStoryboard(_ storyboard: UIStoryboard) -> Self? {
         return controllerFromStoryboard(storyboard)
     }
 }
 
-private func controllerFromStoryboard<T: UIViewController>(storyboard: UIStoryboard) -> T? {
+private func controllerFromStoryboard<T: UIViewController>(_ storyboard: UIStoryboard) -> T? {
     return T.fromStoryboard(storyboard, identifier: T.className) as? T
 }

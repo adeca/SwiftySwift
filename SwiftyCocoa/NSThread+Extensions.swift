@@ -10,8 +10,8 @@ import Foundation
 
 // MARK: - NSThread
 
-extension NSThread {
-    public func objectFromThreadDictionary<T: AnyObject>(key:NSCopying, @autoclosure defaultValue: () -> T) -> T {
+extension Thread {
+    public func objectFromThreadDictionary<T: AnyObject>(_ key:NSCopying, defaultValue: @autoclosure () -> T) -> T {
         
         if let result = threadDictionary[key] as? T {
             return result
@@ -22,7 +22,7 @@ extension NSThread {
         }
     }
     
-    public class func objectFromThreadDictionary<T: AnyObject>(key:NSCopying, @autoclosure defaultValue: () -> T) -> T {
-        return currentThread().objectFromThreadDictionary(key, defaultValue: defaultValue)
+    public class func objectFromThreadDictionary<T: AnyObject>(_ key:NSCopying, defaultValue: @autoclosure () -> T) -> T {
+        return current.objectFromThreadDictionary(key, defaultValue: defaultValue)
     }
 }

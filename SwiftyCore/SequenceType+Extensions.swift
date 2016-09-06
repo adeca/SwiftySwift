@@ -8,15 +8,15 @@
 
 // MARK: - SequenceType
 
-extension SequenceType where Generator.Element : Equatable {
+extension Sequence where Iterator.Element : Equatable {
     /// Return `true` iff all elements of `other` are contained in `self`.
-    public func contains<S: SequenceType where S.Generator.Element == Generator.Element>(other: S) -> Bool {
+    public func contains<S: Sequence>(_ other: S) -> Bool where S.Iterator.Element == Iterator.Element {
         return other.all { self.contains($0) }
     }
     
     /// Return an `Array` with the elements of self, with all duplicates removed.
-    public func filterDuplicates() -> [Self.Generator.Element] {
-        var result: [Self.Generator.Element] = []
+    public func filteringDuplicates() -> [Iterator.Element] {
+        var result: [Iterator.Element] = []
         for element in self {
             if !result.contains(element) { result.append(element) }
         }
@@ -24,17 +24,17 @@ extension SequenceType where Generator.Element : Equatable {
     }
 }
 
-extension SequenceType where Generator.Element : Hashable {
+extension Sequence where Iterator.Element : Hashable {
     /// Return `true` iff all elements of `other` are contained in `self`.
-    public func contains<S: SequenceType where S.Generator.Element == Generator.Element>(other: S) -> Bool {
+    public func contains<S: Sequence>(_ other: S) -> Bool where S.Iterator.Element == Iterator.Element {
         let set = Set(self)
         return other.all { set.contains($0) }
     }
     
     /// Return an `Array` with the elements of self, with all duplicates removed.
-    public func filterDuplicates() -> [Self.Generator.Element] {
-        var result = Array<Generator.Element>()
-        var set    = Set<Generator.Element>()
+    public func filteringDuplicates() -> [Iterator.Element] {
+        var result = Array<Iterator.Element>()
+        var set    = Set<Iterator.Element>()
         
         for element in self {
             if !set.contains(element) { 
@@ -46,9 +46,9 @@ extension SequenceType where Generator.Element : Hashable {
     }
 }
 
-extension SequenceType {    
+extension Sequence {    
     /// Return `true` if the predicate returns `true` for all elements of `self`
-    public func all(@noescape predicate: (Self.Generator.Element) -> Bool) -> Bool {
+    public func all(_ predicate: (Iterator.Element) -> Bool) -> Bool {
         for element in self {
             guard predicate(element) else { return false }
         }
@@ -56,27 +56,27 @@ extension SequenceType {
     }
     
     /// Return `true` if the predicate returns `true` for any element in `self`
-    public func any(@noescape predicate: (Self.Generator.Element) -> Bool) -> Bool {
+    public func any(_ predicate: (Iterator.Element) -> Bool) -> Bool {
         for element in self {
             if predicate(element) { return true }
         }
         return false
     }
-    
+        
     /// Return nil is `self` is empty, otherwise return the result of repeatedly 
     /// calling `combine` with each element of `self`, in turn.
     /// i.e. return `combine(combine(...combine(combine(self[0], self[1]),
     /// self[2]),...self[count-2]), self[count-1])`.
-    public func reduce(@noescape combine: (Self.Generator.Element, Self.Generator.Element) -> Self.Generator.Element) -> Self.Generator.Element? {
+    public func reduce(_ nextPartialResult: (Iterator.Element, Iterator.Element) throws -> Iterator.Element) rethrows -> Iterator.Element? {
         
-        var generator = self.generate()
+        var generator = self.makeIterator()
         guard let first = generator.next() else { 
             return nil 
         }
         
         var result = first
         while let element = generator.next() {
-            result = combine(result, element)
+            result = try nextPartialResult(result, element)
         }
         
         return result
@@ -89,7 +89,7 @@ extension SequenceType {
      Returning `nil` will generate no entry for that element. Returning an existing 
      key will overwrite previous entries.
      */
-    public func mapToDictionary<Key: Hashable, Value>(@noescape transform: (Self.Generator.Element) -> (Key, Value)?) -> [Key: Value] {
+    public func mapToDictionary<Key: Hashable, Value>(_ transform: (Iterator.Element) -> (Key, Value)?) -> [Key: Value] {
         let elements = flatMap(transform)
         return Dictionary(elements: elements)
     }
@@ -101,7 +101,7 @@ extension SequenceType {
      Returning `nil` will generate no entry for that element. Returning an existing 
      key will overwrite previous entries.
      */
-    public func mapToDictionary<Key: Hashable>(@noescape transform: (Self.Generator.Element) -> Key?) -> [Key: Self.Generator.Element] {
+    public func mapToDictionary<Key: Hashable>(_ transform: (Iterator.Element) -> Key?) -> [Key: Iterator.Element] {
         return mapToDictionary { value in
             transform(value).map({ ($0, value) })
         }
@@ -115,7 +115,7 @@ extension SequenceType {
      
      Returning `nil` will generate no entry for that element.
      */
-    public func group<Key: Hashable, Value>(@noescape transform: (Self.Generator.Element) -> (Key, Value)?) -> [Key: [Value]] {
+    public func groupBy<Key: Hashable, Value>(_ transform: (Iterator.Element) -> (Key, Value)?) -> [Key: [Value]] {
         
         let elements = flatMap(transform)
         let keys = Set(elements.map { $0.0 })
@@ -138,8 +138,8 @@ extension SequenceType {
      
      Returning `nil` will generate no entry for that element.
      */
-    public func group<Key: Hashable>(@noescape transform: (Self.Generator.Element) -> Key?) -> [Key: [Self.Generator.Element]] {
-        return group { value in
+    public func groupBy<Key: Hashable>(_ transform: (Iterator.Element) -> Key?) -> [Key: [Iterator.Element]] {
+        return groupBy { value in
             transform(value).map({ ($0, value) })
         }
     }
@@ -152,9 +152,9 @@ extension SequenceType {
      
      Returning `nil` will generate no entry for that element.
      */
-    public func groupValues<Key: Equatable, Value>(@noescape transform: (Self.Generator.Element) -> (Key, Value)?) -> [[Value]] {
+    public func groupValues<Key: Equatable, Value>(_ transform: (Iterator.Element) -> (Key, Value)?) -> [[Value]] {
         let elements = flatMap(transform)
-        let keys = elements.map { $0.0 }.filterDuplicates()
+        let keys = elements.map { $0.0 }.filteringDuplicates()
         return keys.map { key in
             elements.filter { $0.0 == key }.map { $0.1 }
         }
@@ -168,14 +168,14 @@ extension SequenceType {
      
      Returning `nil` will generate no entry for that element.
      */
-    public func groupValues<Key: Equatable>(@noescape transform: (Self.Generator.Element) -> Key?) -> [[Self.Generator.Element]] {
+    public func groupValues<Key: Equatable>(_ transform: (Iterator.Element) -> Key?) -> [[Iterator.Element]] {
         return groupValues { value in
             transform(value).map({ ($0, value) })
         }
     }
     
     /// Returns the first non-nil value obtained by applying `transform` to the elements of `self`
-    public func mapFirst<T>(@noescape transform: (Self.Generator.Element) -> T?) -> T? {        
+    public func mapFirst<T>(_ transform: (Iterator.Element) -> T?) -> T? {        
         for value in self {
             if let result = transform(value) { return result }
         }
@@ -183,49 +183,49 @@ extension SequenceType {
     }
     
     /// Returns the first non-nil value obtained by applying `transform` to the elements of `self` in reverse order
-    public func mapLast<T>(@noescape transform: (Self.Generator.Element) -> T?) -> T? {
-        for element in self.lazy.reverse() {
+    public func mapLast<T>(_ transform: (Iterator.Element) -> T?) -> T? {
+        for element in self.lazy.reversed() {
             if let result = transform(element) { return result }
         }
         return nil
     }
-    
+        
     /// Use the given closures to extract the values for comparison. If the values 
     /// are equal compare using the next closure in the list until they are all exhausted
-    public func minElement(values: ((Self.Generator.Element, Self.Generator.Element) -> NSComparisonResult)...) -> Self.Generator.Element? {
-        return minElement(values)
+    public func min(by values: ((Iterator.Element, Iterator.Element) -> ComparisonResult)...) -> Iterator.Element? {
+        return self.min(by: values)
     }
     
     /// Use the given closures to extract the values for comparison. If the values 
     /// are equal compare using the next closure in the list until they are all exhausted
-    public func minElement(values: [(Self.Generator.Element, Self.Generator.Element) -> NSComparisonResult]) -> Self.Generator.Element? {
+    public func min(by values: [(Iterator.Element, Iterator.Element) -> ComparisonResult]) -> Iterator.Element? {
         guard values.count > 0 else { return nil }
-        return minElement(orderedBefore(values))
+        return self.min(by: orderedBefore(values))
     }
     
     /// Use the given closures to extract the values for comparison. If the values 
     /// are equal compare using the next closure in the list until they are all exhausted
-    public func maxElement(values: ((Self.Generator.Element, Self.Generator.Element) -> NSComparisonResult)...) -> Self.Generator.Element? {
-        return maxElement(values)
+    public func max(by values: ((Iterator.Element, Iterator.Element) -> ComparisonResult)...) -> Iterator.Element? {
+        return self.max(by: values)
     }
     
     /// Use the given closures to extract the values for comparison. If the values 
     /// are equal compare using the next closure in the list until they are all exhausted
-    public func maxElement(values: [(Self.Generator.Element, Self.Generator.Element) -> NSComparisonResult]) -> Self.Generator.Element? {
+    public func max(by values: [(Iterator.Element, Iterator.Element) -> ComparisonResult]) -> Iterator.Element? {
         guard values.count > 0 else { return nil }
-        return maxElement(orderedBefore(values))
+        return self.max(by: orderedBefore(values))
     }
     
     /// Use the given closures to extract the values for comparison. If the values 
     /// are equal compare using the next closure in the list until they are all exhausted
-    public func sort(values: ((Self.Generator.Element, Self.Generator.Element) -> NSComparisonResult)...) -> [Self.Generator.Element] {
-        return sort(values)
+    public func sorted(by values: ((Iterator.Element, Iterator.Element) -> ComparisonResult)...) -> [Iterator.Element] {
+        return sorted(by: values)
     }
     
     /// Use the given closures to extract the values for comparison. If the values 
     /// are equal compare using the next closure in the list until they are all exhausted
-    public func sort(values: [(Self.Generator.Element, Self.Generator.Element) -> NSComparisonResult]) -> [Self.Generator.Element] {
-        return sort(orderedBefore(values))
+    public func sorted(by values: [(Iterator.Element, Iterator.Element) -> ComparisonResult]) -> [Iterator.Element] {
+        return sorted(by: orderedBefore(values))
     }
 }
 
@@ -233,12 +233,12 @@ extension SequenceType {
 ///
 /// Use the given closures to extract the values for comparison. If the values 
 /// are equal compare using the next closure in the list until they are all exhausted
-private func orderedBefore<T>(comparisons: [(T, T) -> NSComparisonResult]) ->  (T, T) -> Bool {
+private func orderedBefore<T>(_ comparisons: [(T, T) -> ComparisonResult]) ->  (T, T) -> Bool {
     return { (lhs, rhs) -> Bool in
         for compare in comparisons {
             let result = compare(lhs, rhs)
-            if result != .OrderedSame { 
-                return result == .OrderedAscending 
+            if result != .orderedSame { 
+                return result == .orderedAscending 
             }
         }
         return true
