@@ -8,13 +8,13 @@
 
 // MARK: - IntegerArithmeticType
 
-extension IntegerArithmeticType where Self: IntegerLiteralConvertible {
+extension IntegerArithmetic where Self: ExpressibleByIntegerLiteral {
     public var isEven: Bool { return (self % 2) == 0 }
     public var isOdd: Bool  { return !isEven }
 }
 
-extension CollectionType where Generator.Element: IntegerArithmeticType {
-    public func sum() -> Generator.Element? {
+extension Collection where Iterator.Element: IntegerArithmetic {
+    public func sum() -> Iterator.Element? {
         return reduce(+)
     }
     

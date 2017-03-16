@@ -17,13 +17,13 @@ extension UIImageView {
     
     public var imageOrientation: UIImageOrientation? {
         get { return image?.imageOrientation }
-        set { image = newValue.flatMap { image?.imageWithOrientation($0) } }
+        set { image = newValue.flatMap { image?.image(withOrientation: $0) } }
     }
     
     public func mirrorVertically() {
-        image = image?.verticallyMirroredImage()
+        image = image?.verticallyMirrored()
     }
     public func mirrorHorizontally() {
-        image = image?.horizontallyMirroredImage()
+        image = image?.horizontallyMirrored()
     }
 }

@@ -11,9 +11,9 @@ import Foundation
 // MARK: - NSLayoutConstraint
 
 extension NSLayoutConstraint {
-    public class func constraintsWithVisualFormats(formats: [String], options opts: NSLayoutFormatOptions, metrics: [String : AnyObject]?, views: [String : AnyObject]) -> [NSLayoutConstraint] {
+    public class func constraints(withVisualFormats formats: [String], options opts: NSLayoutFormatOptions, metrics: [String : Any]?, views: [String : Any]) -> [NSLayoutConstraint] {
         return formats.flatMap {
-            NSLayoutConstraint.constraintsWithVisualFormat($0, options: opts, metrics: metrics, views: views)
+            NSLayoutConstraint.constraints(withVisualFormat: $0, options: opts, metrics: metrics, views: views)
         }
     }
 }

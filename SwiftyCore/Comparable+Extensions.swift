@@ -9,10 +9,10 @@
 // MARK: - Comparable
 
 extension Comparable {
-    public func compare(other: Self) -> NSComparisonResult {
+    public func compare(_ other: Self) -> ComparisonResult {
         return 
-            self < other ?  .OrderedAscending : 
-            self == other ? .OrderedSame : 
-                            .OrderedDescending
+            self < other ?  .orderedAscending : 
+            self == other ? .orderedSame : 
+                            .orderedDescending
     }
 }

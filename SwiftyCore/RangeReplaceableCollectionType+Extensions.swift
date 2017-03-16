@@ -8,14 +8,14 @@
 
 // MARK: - RangeReplaceableCollectionType
 
-extension RangeReplaceableCollectionType {
-    mutating public func remove(@noescape predicate: (Self.Generator.Element) -> Bool) -> Self.Generator.Element? {
-        return indexOf(predicate).map { removeAtIndex($0) }
+extension RangeReplaceableCollection {
+    mutating public func remove(where predicate: (Iterator.Element) -> Bool) -> Iterator.Element? {
+        return index(where: predicate).map { remove(at: $0) }
     }
 }
 
-extension RangeReplaceableCollectionType where Generator.Element : Equatable {
-    mutating public func remove(element: Self.Generator.Element) -> Self.Generator.Element? {
-        return indexOf(element).map { removeAtIndex($0) }
+extension RangeReplaceableCollection where Iterator.Element : Equatable {
+    mutating public func remove(_ element: Iterator.Element) -> Iterator.Element? {
+        return index(of: element).map { remove(at: $0) }
     }
 }

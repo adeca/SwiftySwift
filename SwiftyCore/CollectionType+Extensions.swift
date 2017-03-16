@@ -8,25 +8,30 @@
 
 // MARK: - CollectionType
 
-extension CollectionType {
-    public func decompose() -> (Self.Generator.Element, Self.SubSequence)? {
+extension Collection {
+    public func decompose() -> (Iterator.Element, SubSequence)? {
         return first.map { ($0, dropFirst()) }
     }
     
-    public func find(@noescape predicate: (Self.Generator.Element) -> Bool) -> Self.Generator.Element? {
-        return indexOf(predicate).map { self[$0] }
+    // DEPRECATED: use first(where:) instead
+    @available(*, deprecated)
+    public func find(_ predicate: (Iterator.Element) throws -> Bool) rethrows -> Iterator.Element? {
+        return try first(where: predicate)
     }
 }
 
-extension CollectionType where Generator.Element : Equatable {
-    public func find(element: Self.Generator.Element) -> Self.Generator.Element? {        
-        return indexOf(element).map { self[$0] }
+extension Collection where Iterator.Element : Equatable {
+    public func first(equalTo element: Iterator.Element) -> Iterator.Element? {
+        return first { $0 == element }
     }
 }
 
-extension CollectionType where Index == Int {
-    public func randomElement() -> Self.Generator.Element {
-        let idx = Int(arc4random_uniform(UInt32(count)))
+extension Collection where Index == Int, IndexDistance == Int {
+    public func randomElement() -> Iterator.Element? {
+        let count = UInt32(self.count)
+        guard count > 0 else { return nil }
+        
+        let idx = Int(arc4random_uniform(count))
         return self[idx]
     }
 }

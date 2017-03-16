@@ -11,35 +11,35 @@ import Foundation
 // MARK: - NSObject
 
 extension NSObject {
-    public func performBlock(block: () -> Void) {
+    public func perform(_ block: () -> Void) {
         block()
     }
     
-    public func performAfterDelay(delay: NSTimeInterval, _ block: () -> Void) {
-        dispatch_after(delay) { [weak self] in 
-            self?.performBlock(block) 
+    public func performAfter(delay: TimeInterval, _ block: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(delay: delay) { [weak self] in 
+            self?.perform(block) 
         }
     }
     
-    public func performInBackground(block: () -> Void) {
-        dispatch_async(DISPATCH_QUEUE_PRIORITY_DEFAULT, block)
+    public func performInBackground(_ block: @escaping () -> Void) {
+        DispatchQueue.global(qos: .default).async(execute: block)
     }
     
-    public func performInMainThread(block: () -> Void) {
-        dispatch_async(block)
+    public func performInMainThread(_ block: @escaping () -> Void) {
+        DispatchQueue.main.async(execute: block)
     }
     
     public var className: String {
-        return self.dynamicType.className
+        return type(of: self).className
     }
     public static var className: String {
         return stringFromClass(self)
     }
     
-    public func attachObject(object: AnyObject) {
-        objc_setAssociatedObject(self, unsafeAddressOf(object), object, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    public func attach(_ object: AnyObject) {
+        objc_setAssociatedObject(self, Unmanaged.passUnretained(object).toOpaque(), object, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
-    public func detachObject(object: AnyObject) {
-        objc_setAssociatedObject(self, unsafeAddressOf(object), nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    public func detach(_ object: AnyObject) {
+        objc_setAssociatedObject(self, Unmanaged.passUnretained(object).toOpaque(), nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 }

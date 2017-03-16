@@ -12,31 +12,31 @@ import UIKit
 
 extension UITableView {
     public var numberOfRows: Int {
-        return (0..<(numberOfSections)).reduce(0) {
-            $0 + numberOfRowsInSection($1)
+        return (0..<numberOfSections).reduce(0) {
+            $0 + self.numberOfRows(inSection: $1)
         }
     }
     
-    public func insertSection(section: Int, withRowAnimation animation: UITableViewRowAnimation) {
-        insertSections(NSIndexSet(index: section), withRowAnimation: animation)
+    public func insertSection(_ section: Int, with animation: UITableViewRowAnimation) {
+        insertSections(IndexSet(integer: section), with: animation)
     }
-    public func deleteSection(section: Int, withRowAnimation animation: UITableViewRowAnimation) {
-        deleteSections(NSIndexSet(index: section), withRowAnimation: animation)
+    public func deleteSection(_ section: Int, with animation: UITableViewRowAnimation) {
+        deleteSections(IndexSet(integer: section), with: animation)
     }
-    public func reloadSection(section: Int, withRowAnimation animation: UITableViewRowAnimation) {
-        reloadSections(NSIndexSet(index: section), withRowAnimation: animation)
+    public func reloadSection(_ section: Int, with animation: UITableViewRowAnimation) {
+        reloadSections(IndexSet(integer: section), with: animation)
     }
     
     public func dequeueReusableCell<T: UITableViewCell>() -> T? {
-        return dequeueReusableCellWithIdentifier(T.cellIdentifier) as? T
+        return dequeueReusableCell(withIdentifier: T.cellIdentifier) as? T
     }
     
-    public func dequeueReusableCellForIndexPath<T: UITableViewCell>(indexPath: NSIndexPath) -> T {
-        return dequeueReusableCellWithIdentifier(T.cellIdentifier, forIndexPath: indexPath) as! T
+    public func dequeueReusableCell<T: UITableViewCell>(forIndexPath indexPath: IndexPath) -> T {
+        return dequeueReusableCell(withIdentifier: T.cellIdentifier, for: indexPath) as! T
     }
     
     public func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>() -> T? {
-        return dequeueReusableHeaderFooterViewWithIdentifier(T.defaultIdentifier) as? T
+        return self.dequeueReusableHeaderFooterView(withIdentifier: T.defaultIdentifier) as? T
     }
 }
 
@@ -47,12 +47,12 @@ extension UITableViewCell {
         return className
     }
     
-    public class func dequeueReusableCellFromTableView(tableView: UITableView) -> Self? {
+    public class func dequeueReusableCell(fromTableView tableView: UITableView) -> Self? {
         return tableView.dequeueReusableCell()
     }
     
-    public class func dequeueReusableCellFromTableView(tableView: UITableView, indexPath: NSIndexPath) -> Self {
-        return tableView.dequeueReusableCellForIndexPath(indexPath)
+    public class func dequeueReusableCell(fromTableView tableView: UITableView, indexPath: IndexPath) -> Self {
+        return tableView.dequeueReusableCell(forIndexPath: indexPath)
     }
 }
 
@@ -63,12 +63,12 @@ extension UITableViewHeaderFooterView {
         return className
     }
     
-    public class func dequeueFromTableView(tableView: UITableView) -> Self? {
+    public class func dequeue(fromTableView tableView: UITableView) -> Self? {
         return tableView.dequeueReusableHeaderFooterView()
     }
     
-    public class func registerNibInTableView(tableView: UITableView, bundle: NSBundle? = nil) {
+    public class func registerNib(inTableView tableView: UITableView, bundle: Bundle? = nil) {
         let nib = UINib(nibName: defaultIdentifier, bundle: bundle)
-        tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: defaultIdentifier)
+        tableView.register(nib, forHeaderFooterViewReuseIdentifier: defaultIdentifier)
     }
 }
