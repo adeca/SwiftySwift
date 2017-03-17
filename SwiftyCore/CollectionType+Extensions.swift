@@ -12,12 +12,6 @@ extension Collection {
     public func decompose() -> (Iterator.Element, SubSequence)? {
         return first.map { ($0, dropFirst()) }
     }
-    
-    // DEPRECATED: use first(where:) instead
-    @available(*, deprecated)
-    public func find(_ predicate: (Iterator.Element) throws -> Bool) rethrows -> Iterator.Element? {
-        return try first(where: predicate)
-    }
 }
 
 extension Collection where Iterator.Element : Equatable {
