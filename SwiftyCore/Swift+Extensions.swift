@@ -79,11 +79,11 @@ public func mod(_ lhs: Int, _ rhs: Int) -> Int {
 }
 
 public func min<T : Comparable>(_ t: (T, T)) -> T {
-    return min(t.0, t.1)
+    return Swift.min(t.0, t.1)
 }
 
 public func max<T : Comparable>(_ t: (T, T)) -> T {
-    return max(t.0, t.1)
+    return Swift.max(t.0, t.1)
 }
 
 public func clamp<T: Comparable>(_ x: T, _ low: T, _ high: T) -> T {
