@@ -188,6 +188,7 @@
 		E34D11E61B1D032B000816A9 /* SwiftySwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftySwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E34D11EC1B1D032B000816A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E34D11ED1B1D032B000816A9 /* SwiftySwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftySwiftTests.swift; sourceTree = "<group>"; };
+		E36EDC201EF1DD3200432A23 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E3A5D2671BE04374002067C2 /* SwiftySwift.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftySwift.podspec; sourceTree = SOURCE_ROOT; };
 		E3C7CBA91F63205300719D0E /* FloatingPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extensions.swift"; sourceTree = "<group>"; };
 		E3C7CBAC1F632D9000719D0E /* SignedNumeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedNumeric+Extensions.swift"; sourceTree = "<group>"; };
@@ -369,6 +370,7 @@
 		E34D11D11B1D032B000816A9 = {
 			isa = PBXGroup;
 			children = (
+				E36EDC201EF1DD3200432A23 /* README.md */,
 				E34D11DD1B1D032B000816A9 /* SwiftySwift */,
 				E30DDF5E1C90EAA400FBC536 /* SwiftyCore */,
 				E30DDF4F1C90E9C800FBC536 /* SwiftyCocoa */,
