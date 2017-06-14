@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SwiftySwift"
-  s.version      = "2.1.1"
+  s.version      = "3.0"
   s.summary      = "SwiftySwift is a collection of useful extensions for Swift types and Cocoa objects."
   s.homepage     = "https://github.com/adeca/SwiftySwift"
   s.license      = { :type => 'MIT' }
@@ -9,6 +9,11 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.platform     = :ios, '8.0'
   s.ios.deployment_target 	= "8.0"
+
+  s.pod_target_xcconfig = { 
+    'SWIFT_VERSION' => '4.0',
+    'SWIFT_SWIFT3_OBJC_INFERENCE' => 'Off',
+  }
 
   s.subspec 'Core' do |sub|
     sub.source_files = 'SwiftyCore/*.swift'
