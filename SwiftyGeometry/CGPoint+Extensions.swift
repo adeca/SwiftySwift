@@ -13,8 +13,8 @@ import CoreGraphics
 extension CGPoint {
     public func clamped(to rect: CGRect) -> CGPoint {
         return CGPoint(
-            x: clamp(x, rect.minX, rect.maxX), 
-            y: clamp(y, rect.minY, rect.maxY)
+            x: clamp(x, min: rect.minX, max: rect.maxX),
+            y: clamp(y, min: rect.minY, max: rect.maxY)
         )
     }
     

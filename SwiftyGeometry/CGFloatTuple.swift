@@ -80,6 +80,13 @@ extension CGFloatTupleConvertible {
         lhs = lhs - rhs
     }
     
+    public static func - (lhs: Self, rhs: CGFloat) -> Self {
+        return lhs.map({ $0 - rhs })
+    }
+    public static func -= (lhs: inout Self, rhs: CGFloat) {
+        lhs = lhs - rhs
+    }
+    
     public static func *(lhs: Self, rhs: CGFloat) -> Self {
         return lhs.map { $0 * rhs }
     }
@@ -117,10 +124,15 @@ public func abs<T: CGFloatTupleConvertible>(_ x: T) -> T {
     return x.map { abs($0) }
 }
 
-public func clamp<T: CGFloatTupleConvertible>(_ x: T, _ low: CGFloatTupleConvertible, _ high: CGFloatTupleConvertible) -> T {
-    return x.merge([low, high]) {
-        clamp($0[0], $0[1], $0[2])
+public func clamp<T: CGFloatTupleConvertible>(_ x: T, min: CGFloatTupleConvertible, max: CGFloatTupleConvertible) -> T {
+    return x.merge([min, max]) {
+        clamp($0[0], min: $0[1], max: $0[2])
     }
+}
+
+@available(*, deprecated)
+public func clamp<T: CGFloatTupleConvertible>(_ x: T, _ min: CGFloatTupleConvertible, _ max: CGFloatTupleConvertible) -> T {
+    return clamp(x, min: min, max: max)
 }
 
 extension CGRect {
