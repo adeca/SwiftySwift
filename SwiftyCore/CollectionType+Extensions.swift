@@ -9,6 +9,8 @@
 // MARK: - CollectionType
 
 extension Collection {
+    /// Returns a tuple composed of: the first element in the collection, and
+    /// the collection without the first element.
     public func decompose() -> (Iterator.Element, SubSequence)? {
         return first.map { ($0, dropFirst()) }
     }
@@ -27,5 +29,18 @@ extension Collection where Index == Int, IndexDistance == Int {
         
         let idx = Int(arc4random_uniform(count))
         return self[idx]
+    }
+}
+
+extension Collection where Iterator.Element: Numeric {
+    public func sum() -> Iterator.Element? {
+        return reduce(+)
+    }
+}
+
+extension Collection where Index == Int {
+    /// Returns the element at the given index, or `nil` if the index is out of bounds.
+    public func at(_ index: Int) -> Iterator.Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }

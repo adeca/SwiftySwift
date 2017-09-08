@@ -19,6 +19,12 @@
 		E34D11E11B1D032B000816A9 /* SwiftySwift.h in Headers */ = {isa = PBXBuildFile; fileRef = E34D11E01B1D032B000816A9 /* SwiftySwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E34D11E71B1D032B000816A9 /* SwiftySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E34D11DB1B1D032B000816A9 /* SwiftySwift.framework */; };
 		E34D11EE1B1D032B000816A9 /* SwiftySwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D11ED1B1D032B000816A9 /* SwiftySwiftTests.swift */; };
+		E3C7CBAA1F63205300719D0E /* FloatingPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C7CBA91F63205300719D0E /* FloatingPoint+Extensions.swift */; };
+		E3C7CBAB1F632D3100719D0E /* FloatingPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C7CBA91F63205300719D0E /* FloatingPoint+Extensions.swift */; };
+		E3C7CBAD1F632D9000719D0E /* SignedNumeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C7CBAC1F632D9000719D0E /* SignedNumeric+Extensions.swift */; };
+		E3C7CBAE1F632D9000719D0E /* SignedNumeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C7CBAC1F632D9000719D0E /* SignedNumeric+Extensions.swift */; };
+		E3C7CBB01F63331000719D0E /* UnsignedInteger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C7CBAF1F63331000719D0E /* UnsignedInteger+Extensions.swift */; };
+		E3C7CBB11F63331000719D0E /* UnsignedInteger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C7CBAF1F63331000719D0E /* UnsignedInteger+Extensions.swift */; };
 		E3D96D321CECF19500D58C9E /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D291CECF19500D58C9E /* UICollectionView+Extensions.swift */; };
 		E3D96D331CECF19500D58C9E /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D291CECF19500D58C9E /* UICollectionView+Extensions.swift */; };
 		E3D96D341CECF19500D58C9E /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D2A1CECF19500D58C9E /* UIColor+Extensions.swift */; };
@@ -181,6 +187,9 @@
 		E34D11EC1B1D032B000816A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E34D11ED1B1D032B000816A9 /* SwiftySwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftySwiftTests.swift; sourceTree = "<group>"; };
 		E3A5D2671BE04374002067C2 /* SwiftySwift.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftySwift.podspec; sourceTree = SOURCE_ROOT; };
+		E3C7CBA91F63205300719D0E /* FloatingPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extensions.swift"; sourceTree = "<group>"; };
+		E3C7CBAC1F632D9000719D0E /* SignedNumeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedNumeric+Extensions.swift"; sourceTree = "<group>"; };
+		E3C7CBAF1F63331000719D0E /* UnsignedInteger+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnsignedInteger+Extensions.swift"; sourceTree = "<group>"; };
 		E3D96D291CECF19500D58C9E /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		E3D96D2A1CECF19500D58C9E /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		E3D96D2B1CECF19500D58C9E /* UIFont+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
@@ -302,6 +311,9 @@
 				E3D96D801CECF9AA00D58C9E /* OptionalConvertible.swift */,
 				E3D96D831CECF9D100D58C9E /* Optional+Extensions.swift */,
 				E3D96D861CECF9F600D58C9E /* BinaryInteger+Extensions.swift */,
+				E3C7CBA91F63205300719D0E /* FloatingPoint+Extensions.swift */,
+				E3C7CBAC1F632D9000719D0E /* SignedNumeric+Extensions.swift */,
+				E3C7CBAF1F63331000719D0E /* UnsignedInteger+Extensions.swift */,
 				E30DDF5F1C90EAA400FBC536 /* SwiftyCore.h */,
 				E30DDF611C90EAA400FBC536 /* Info.plist */,
 			);
@@ -750,7 +762,10 @@
 				E3D96D6D1CECF85300D58C9E /* SequenceType+Extensions.swift in Sources */,
 				E3D96D791CECF91300D58C9E /* Dictionary+Extensions.swift in Sources */,
 				E3D96D821CECF9AA00D58C9E /* OptionalConvertible.swift in Sources */,
+				E3C7CBB11F63331000719D0E /* UnsignedInteger+Extensions.swift in Sources */,
+				E3C7CBAA1F63205300719D0E /* FloatingPoint+Extensions.swift in Sources */,
 				E3D96D7F1CECF97200D58C9E /* Comparable+Extensions.swift in Sources */,
+				E3C7CBAE1F632D9000719D0E /* SignedNumeric+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -807,6 +822,8 @@
 				E3D96D5A1CECF6D100D58C9E /* NSThread+Extensions.swift in Sources */,
 				E3D96D691CECF77300D58C9E /* Dispatch+Extensions.swift in Sources */,
 				E3D96D4B1CECF57C00D58C9E /* CGRect+Extensions.swift in Sources */,
+				E3C7CBAD1F632D9000719D0E /* SignedNumeric+Extensions.swift in Sources */,
+				E3C7CBAB1F632D3100719D0E /* FloatingPoint+Extensions.swift in Sources */,
 				E3D96D6F1CECF8B200D58C9E /* SortOrder.swift in Sources */,
 				E3D96D321CECF19500D58C9E /* UICollectionView+Extensions.swift in Sources */,
 				E3D96D401CECF19500D58C9E /* UIView+Extensions.swift in Sources */,
@@ -823,6 +840,7 @@
 				E3D96D811CECF9AA00D58C9E /* OptionalConvertible.swift in Sources */,
 				E3D96D7E1CECF97200D58C9E /* Comparable+Extensions.swift in Sources */,
 				E3D96D3A1CECF19500D58C9E /* UIImage+Extensions.swift in Sources */,
+				E3C7CBB01F63331000719D0E /* UnsignedInteger+Extensions.swift in Sources */,
 				E3D96D361CECF19500D58C9E /* UIFont+Extensions.swift in Sources */,
 				E3D96D541CECF66700D58C9E /* CGGeometry+CGFloatTuple.swift in Sources */,
 				E3D96D381CECF19500D58C9E /* UIGestureRecognizer+Extensions.swift in Sources */,

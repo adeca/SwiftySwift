@@ -174,6 +174,19 @@ extension Sequence {
         }
     }
     
+    /**
+     Returns a tuple containing, in order, the elements of the sequence divided into two
+     arrays, with one containing the elements that satisfy the given predicate and the
+     other the elements that don't.
+     */
+    public func groupFilter(_ includeElement: (Self.Iterator.Element) -> Bool) -> (included: [Self.Iterator.Element], excluded: [Self.Iterator.Element]) {
+        // group included and excluded elements using the result of the block (true/false)
+        let grouped = self.groupBy {
+            includeElement($0)
+        }
+        return (grouped[true] ?? [], grouped[false] ?? [])
+    }
+    
     /// Returns the first non-nil value obtained by applying `transform` to the elements of `self`
     public func mapFirst<T>(_ transform: (Iterator.Element) -> T?) -> T? {        
         for value in self {
