@@ -25,6 +25,8 @@
 		E3C7CBAE1F632D9000719D0E /* SignedNumeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C7CBAC1F632D9000719D0E /* SignedNumeric+Extensions.swift */; };
 		E3C7CBB01F63331000719D0E /* UnsignedInteger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C7CBAF1F63331000719D0E /* UnsignedInteger+Extensions.swift */; };
 		E3C7CBB11F63331000719D0E /* UnsignedInteger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C7CBAF1F63331000719D0E /* UnsignedInteger+Extensions.swift */; };
+		E3C7CBB31F633AD300719D0E /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C7CBB21F633AD300719D0E /* URL+Extensions.swift */; };
+		E3C7CBB41F633AD300719D0E /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C7CBB21F633AD300719D0E /* URL+Extensions.swift */; };
 		E3D96D321CECF19500D58C9E /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D291CECF19500D58C9E /* UICollectionView+Extensions.swift */; };
 		E3D96D331CECF19500D58C9E /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D291CECF19500D58C9E /* UICollectionView+Extensions.swift */; };
 		E3D96D341CECF19500D58C9E /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D2A1CECF19500D58C9E /* UIColor+Extensions.swift */; };
@@ -190,6 +192,7 @@
 		E3C7CBA91F63205300719D0E /* FloatingPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extensions.swift"; sourceTree = "<group>"; };
 		E3C7CBAC1F632D9000719D0E /* SignedNumeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignedNumeric+Extensions.swift"; sourceTree = "<group>"; };
 		E3C7CBAF1F63331000719D0E /* UnsignedInteger+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnsignedInteger+Extensions.swift"; sourceTree = "<group>"; };
+		E3C7CBB21F633AD300719D0E /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		E3D96D291CECF19500D58C9E /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		E3D96D2A1CECF19500D58C9E /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		E3D96D2B1CECF19500D58C9E /* UIFont+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
@@ -291,6 +294,7 @@
 				E3D96D621CECF72F00D58C9E /* NSAttributedString+Extensions.swift */,
 				E3D96D651CECF74200D58C9E /* NSNotificationCenter+Extensions.swift */,
 				E3D96D681CECF77300D58C9E /* Dispatch+Extensions.swift */,
+				E3C7CBB21F633AD300719D0E /* URL+Extensions.swift */,
 				E30DDF501C90E9C800FBC536 /* SwiftyCocoa.h */,
 				E30DDF521C90E9C800FBC536 /* Info.plist */,
 			);
@@ -740,6 +744,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3D96D641CECF72F00D58C9E /* NSAttributedString+Extensions.swift in Sources */,
+				E3C7CBB41F633AD300719D0E /* URL+Extensions.swift in Sources */,
 				E3D96D5E1CECF6EC00D58C9E /* NSLayoutConstraint+Extensions.swift in Sources */,
 				E3D96D581CECF6B800D58C9E /* NSObject+Extensions.swift in Sources */,
 				E3D96D5B1CECF6D100D58C9E /* NSThread+Extensions.swift in Sources */,
@@ -822,6 +827,7 @@
 				E3D96D5A1CECF6D100D58C9E /* NSThread+Extensions.swift in Sources */,
 				E3D96D691CECF77300D58C9E /* Dispatch+Extensions.swift in Sources */,
 				E3D96D4B1CECF57C00D58C9E /* CGRect+Extensions.swift in Sources */,
+				E3C7CBB31F633AD300719D0E /* URL+Extensions.swift in Sources */,
 				E3C7CBAD1F632D9000719D0E /* SignedNumeric+Extensions.swift in Sources */,
 				E3C7CBAB1F632D3100719D0E /* FloatingPoint+Extensions.swift in Sources */,
 				E3D96D6F1CECF8B200D58C9E /* SortOrder.swift in Sources */,
