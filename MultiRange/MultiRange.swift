@@ -15,16 +15,14 @@ tuple for each combination between the start and end tuples
 e.g.: (1,1)...(2,2) will generate (1,1), (1,2), (2,1), (2,2)
 **/
 
-public func ..< <T>(start: (T, T), end: (T, T)) -> MultiRange<T> 
-    where T: Strideable & Comparable, T.Stride: SignedInteger {
+public func ..< <T>(start: (T, T), end: (T, T)) -> MultiRange<T> {
     return MultiRange(
         rows:    start.0 ..< end.0, 
         columns: start.1 ..< end.1
     )
 }
 
-public func ... <T>(start: (T, T), end: (T, T)) -> MultiRange<T> 
-    where T: Strideable & Comparable, T.Stride: SignedInteger {
+public func ... <T>(start: (T, T), end: (T, T)) -> MultiRange<T> {
     return MultiRange(
         rows:    CountableRange(start.0 ... end.0), 
         columns: CountableRange(start.1 ... end.1)

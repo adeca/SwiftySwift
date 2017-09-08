@@ -125,11 +125,11 @@ public func clamp<T: CGFloatTupleConvertible>(_ x: T, _ low: CGFloatTupleConvert
 
 extension CGRect {
     /// Multiply the rect's origin and size by the given value
-    public static func *<U: CGFloatTupleConvertible>(lhs: CGRect, rhs: U) -> CGRect {
+    public static func * <U: CGFloatTupleConvertible>(lhs: CGRect, rhs: U) -> CGRect {
         return CGRect(origin: lhs.origin * rhs, size: lhs.size * rhs)
     }
     /// Multiply the rect's origin and size by the given value
-    public static func *=<U: CGFloatTupleConvertible>(lhs: inout CGRect, rhs: U) {
+    public static func *= <U: CGFloatTupleConvertible>(lhs: inout CGRect, rhs: U) {
         lhs = lhs * rhs
     }
 }

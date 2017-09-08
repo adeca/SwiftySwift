@@ -77,8 +77,8 @@
 		E3D96D821CECF9AA00D58C9E /* OptionalConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D801CECF9AA00D58C9E /* OptionalConvertible.swift */; };
 		E3D96D841CECF9D100D58C9E /* Optional+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D831CECF9D100D58C9E /* Optional+Extensions.swift */; };
 		E3D96D851CECF9D100D58C9E /* Optional+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D831CECF9D100D58C9E /* Optional+Extensions.swift */; };
-		E3D96D871CECF9F600D58C9E /* IntegerArithmeticType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D861CECF9F600D58C9E /* IntegerArithmeticType+Extensions.swift */; };
-		E3D96D881CECF9F600D58C9E /* IntegerArithmeticType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D861CECF9F600D58C9E /* IntegerArithmeticType+Extensions.swift */; };
+		E3D96D871CECF9F600D58C9E /* BinaryInteger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D861CECF9F600D58C9E /* BinaryInteger+Extensions.swift */; };
+		E3D96D881CECF9F600D58C9E /* BinaryInteger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D861CECF9F600D58C9E /* BinaryInteger+Extensions.swift */; };
 		E3D96D8A1CECFA5900D58C9E /* Swift+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D891CECFA5900D58C9E /* Swift+Extensions.swift */; };
 		E3D96D8B1CECFA5900D58C9E /* Swift+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D891CECFA5900D58C9E /* Swift+Extensions.swift */; };
 		E3D96D8D1CECFA7800D58C9E /* MultiRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D96D8C1CECFA7800D58C9E /* MultiRange.swift */; };
@@ -210,7 +210,7 @@
 		E3D96D7D1CECF97200D58C9E /* Comparable+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comparable+Extensions.swift"; sourceTree = "<group>"; };
 		E3D96D801CECF9AA00D58C9E /* OptionalConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalConvertible.swift; sourceTree = "<group>"; };
 		E3D96D831CECF9D100D58C9E /* Optional+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Extensions.swift"; sourceTree = "<group>"; };
-		E3D96D861CECF9F600D58C9E /* IntegerArithmeticType+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntegerArithmeticType+Extensions.swift"; sourceTree = "<group>"; };
+		E3D96D861CECF9F600D58C9E /* BinaryInteger+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+Extensions.swift"; sourceTree = "<group>"; };
 		E3D96D891CECFA5900D58C9E /* Swift+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift+Extensions.swift"; sourceTree = "<group>"; };
 		E3D96D8C1CECFA7800D58C9E /* MultiRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiRange.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -301,7 +301,7 @@
 				E3D96D7D1CECF97200D58C9E /* Comparable+Extensions.swift */,
 				E3D96D801CECF9AA00D58C9E /* OptionalConvertible.swift */,
 				E3D96D831CECF9D100D58C9E /* Optional+Extensions.swift */,
-				E3D96D861CECF9F600D58C9E /* IntegerArithmeticType+Extensions.swift */,
+				E3D96D861CECF9F600D58C9E /* BinaryInteger+Extensions.swift */,
 				E30DDF5F1C90EAA400FBC536 /* SwiftyCore.h */,
 				E30DDF611C90EAA400FBC536 /* Info.plist */,
 			);
@@ -600,49 +600,49 @@
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 8SZVBV2U3L;
 						DevelopmentTeamName = "Agustin de Cabrera (Personal Team)";
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					E30DDF5C1C90EAA400FBC536 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 8SZVBV2U3L;
 						DevelopmentTeamName = "Agustin de Cabrera (Personal Team)";
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					E30DDF6F1C90EC5E00FBC536 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 8SZVBV2U3L;
 						DevelopmentTeamName = "Agustin de Cabrera (Personal Team)";
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					E30DDF7C1C90EC6F00FBC536 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 8SZVBV2U3L;
 						DevelopmentTeamName = "Agustin de Cabrera (Personal Team)";
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					E30DDF891C90EC7D00FBC536 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 8SZVBV2U3L;
 						DevelopmentTeamName = "Agustin de Cabrera (Personal Team)";
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					E34D11DA1B1D032B000816A9 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = 8SZVBV2U3L;
 						DevelopmentTeamName = "Agustin de Cabrera (Personal Team)";
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					E34D11E51B1D032B000816A9 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = 8SZVBV2U3L;
 						DevelopmentTeamName = "Agustin de Cabrera (Personal Team)";
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -741,7 +741,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3D96D7C1CECF93E00D58C9E /* StringLiteralConvertible+Extensions.swift in Sources */,
-				E3D96D881CECF9F600D58C9E /* IntegerArithmeticType+Extensions.swift in Sources */,
+				E3D96D881CECF9F600D58C9E /* BinaryInteger+Extensions.swift in Sources */,
 				E3D96D851CECF9D100D58C9E /* Optional+Extensions.swift in Sources */,
 				E3D96D731CECF8E200D58C9E /* RangeReplaceableCollectionType+Extensions.swift in Sources */,
 				E3D96D761CECF8F700D58C9E /* CollectionType+Extensions.swift in Sources */,
@@ -794,7 +794,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3D96D871CECF9F600D58C9E /* IntegerArithmeticType+Extensions.swift in Sources */,
+				E3D96D871CECF9F600D58C9E /* BinaryInteger+Extensions.swift in Sources */,
 				E3D96D3C1CECF19500D58C9E /* UIImageView+Extensions.swift in Sources */,
 				E3D96D781CECF91300D58C9E /* Dictionary+Extensions.swift in Sources */,
 				E3D96D8D1CECFA7800D58C9E /* MultiRange.swift in Sources */,
@@ -909,7 +909,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adc.SwiftyCocoa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -928,7 +929,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adc.SwiftyCocoa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -948,7 +950,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adc.SwiftyCore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -967,7 +970,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adc.SwiftyCore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -987,7 +991,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adc.SwiftyGeometry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1006,7 +1011,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adc.SwiftyGeometry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1028,7 +1034,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1048,7 +1055,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.adc.SwiftyUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1071,7 +1079,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1092,7 +1101,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1203,7 +1213,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1223,7 +1234,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adc.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1239,7 +1251,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adc.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1251,7 +1264,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adc.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

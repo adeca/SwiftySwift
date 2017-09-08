@@ -11,11 +11,11 @@ import Foundation
 // MARK: - NSMutableAttributedString
 
 extension NSMutableAttributedString {
-    public func addAttribute(_ name: String, value: Any) {
+    public func addAttribute(_ name: NSAttributedStringKey, value: Any) {
         addAttribute(name, value: value, range: NSMakeRange(0, self.length))
     }
     
-    public func addAttributes(_ attrs: [String : Any]) {
+    public func addAttributes(_ attrs: [NSAttributedStringKey : Any]) {
         addAttributes(attrs, range: NSMakeRange(0, self.length))
     }
 }

@@ -66,7 +66,7 @@ public func lerp<T: FloatingPoint>(_ from: T, _ to: T, _ progress: T) -> T {
     return from * (T(1) - progress) + to * progress
 }
 
-public func sign<T: SignedNumber>(_ x: T) -> T {
+public func sign<T: SignedNumeric>(_ x: T) -> T where T == T.Magnitude {
     return x == 0 ? 0 : x == abs(x) ? 1 : -1
 }
 
