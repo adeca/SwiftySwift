@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SwiftySwift"
-  s.version      = "3.0"
+  s.version      = "3.0.0"
   s.summary      = "SwiftySwift is a collection of useful extensions for Swift types and Cocoa objects."
   s.homepage     = "https://github.com/adeca/SwiftySwift"
   s.license      = { :type => 'MIT' }
