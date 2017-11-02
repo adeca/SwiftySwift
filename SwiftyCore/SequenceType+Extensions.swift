@@ -89,7 +89,7 @@ extension Sequence {
      Returning `nil` will generate no entry for that element. Returning an existing 
      key will overwrite previous entries.
      */
-    public func mapToDictionary<Key: Hashable, Value>(_ transform: (Iterator.Element) -> (Key, Value)?) -> [Key: Value] {
+    public func mapToDictionary<Key, Value>(_ transform: (Iterator.Element) -> (Key, Value)?) -> [Key: Value] {
         let elements = flatMap(transform)
         return Dictionary(elements: elements)
     }
@@ -101,7 +101,7 @@ extension Sequence {
      Returning `nil` will generate no entry for that element. Returning an existing 
      key will overwrite previous entries.
      */
-    public func mapToDictionary<Key: Hashable>(_ transform: (Iterator.Element) -> Key?) -> [Key: Iterator.Element] {
+    public func mapToDictionary<Key>(_ transform: (Iterator.Element) -> Key?) -> [Key: Iterator.Element] {
         return mapToDictionary { value in
             transform(value).map({ ($0, value) })
         }
@@ -115,7 +115,7 @@ extension Sequence {
      
      Returning `nil` will generate no entry for that element.
      */
-    public func groupBy<Key: Hashable, Value>(_ transform: (Iterator.Element) -> (Key, Value)?) -> [Key: [Value]] {
+    public func groupBy<Key, Value>(_ transform: (Iterator.Element) -> (Key, Value)?) -> [Key: [Value]] {
         
         let elements = flatMap(transform)
         let keys = Set(elements.map { $0.0 })
@@ -138,7 +138,7 @@ extension Sequence {
      
      Returning `nil` will generate no entry for that element.
      */
-    public func groupBy<Key: Hashable>(_ transform: (Iterator.Element) -> Key?) -> [Key: [Iterator.Element]] {
+    public func groupBy<Key>(_ transform: (Iterator.Element) -> Key?) -> [Key: [Iterator.Element]] {
         return groupBy { value in
             transform(value).map({ ($0, value) })
         }
@@ -172,6 +172,19 @@ extension Sequence {
         return groupValues { value in
             transform(value).map({ ($0, value) })
         }
+    }
+    
+    /**
+     Returns a tuple containing, in order, the elements of the sequence divided into two
+     arrays, with one containing the elements that satisfy the given predicate and the
+     other the elements that don't.
+     */
+    public func groupFilter(_ includeElement: (Self.Iterator.Element) -> Bool) -> (included: [Self.Iterator.Element], excluded: [Self.Iterator.Element]) {
+        // group included and excluded elements using the result of the block (true/false)
+        let grouped = self.groupBy {
+            includeElement($0)
+        }
+        return (grouped[true] ?? [], grouped[false] ?? [])
     }
     
     /// Returns the first non-nil value obtained by applying `transform` to the elements of `self`

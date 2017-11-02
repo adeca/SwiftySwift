@@ -17,6 +17,14 @@ extension UITableView {
         }
     }
     
+    public var allIndexPaths: [IndexPath] {
+        return (0..<numberOfSections).flatMap { section in
+            (0..<numberOfRows(inSection: section)).map { row in
+                IndexPath(row: row, section: section)
+            }
+        }
+    }
+    
     public func insertSection(_ section: Int, with animation: UITableViewRowAnimation) {
         insertSections(IndexSet(integer: section), with: animation)
     }

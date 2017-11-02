@@ -16,3 +16,13 @@ extension Comparable {
                             .orderedDescending
     }
 }
+
+extension Comparable {
+    public func clamp(min: Self, max: Self) -> Self {
+        return (self < min) ? min : (self > max) ? max : self
+    }
+    
+    public func clamp(_ range: ClosedRange<Self>) -> Self {
+        return clamp(min: range.lowerBound, max: range.upperBound)
+    }
+}

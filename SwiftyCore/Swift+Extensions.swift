@@ -66,16 +66,12 @@ public func lerp<T: FloatingPoint>(_ from: T, _ to: T, _ progress: T) -> T {
     return from * (T(1) - progress) + to * progress
 }
 
-public func sign<T: SignedNumber>(_ x: T) -> T {
-    return x == 0 ? 0 : x == abs(x) ? 1 : -1
+public func sign<T: SignedNumeric>(_ x: T) -> T where T == T.Magnitude {
+    return x.sign
 }
 
 public func sign<T: UnsignedInteger>(_ x: T) -> T {
-    return x == 0 ? 0 : 1
-}
-
-public func mod(_ lhs: Int, _ rhs: Int) -> Int {
-    return (lhs % rhs + rhs) % rhs
+    return x.sign
 }
 
 public func min<T : Comparable>(_ t: (T, T)) -> T {
@@ -86,6 +82,15 @@ public func max<T : Comparable>(_ t: (T, T)) -> T {
     return Swift.max(t.0, t.1)
 }
 
-public func clamp<T: Comparable>(_ x: T, _ low: T, _ high: T) -> T {
-    return (x < low) ? low : (x > high) ? high : x
+public func ratio<T: FloatingPoint>(_ x: T, min: T, max: T) -> T {
+    return x.ratio(min: min, max: max)
+}
+
+public func clamp<T: Comparable>(_ x: T, min: T, max: T) -> T {
+    return x.clamp(min: min, max: max)
+}
+
+@available(*, deprecated)
+public func clamp<T: Comparable>(_ x: T, _ min: T, _ max: T) -> T {
+    return clamp(x, min: min, max: max)
 }

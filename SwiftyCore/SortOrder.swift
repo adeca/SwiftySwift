@@ -52,5 +52,28 @@ extension Sequence {
             sortOrder.isOrderedBefore(transform($0), transform($1)) 
         }
     }
+    
+    /// Returns the minimum element in `self` sorted according to
+    /// the values obtained by applying `transform` to each element.
+    public func min<T: Comparable>(sortOrder: SortOrder = .ascending, by transform: (Self.Iterator.Element) -> T) -> Self.Iterator.Element? {
+        return self.min {
+            sortOrder.isOrderedBefore(transform($0), transform($1))
+        }
+    }
+    
+    /// Returns the maximum element in `self` sorted according to
+    /// the values obtained by applying `transform` to each element.
+    public func max<T: Comparable>(sortOrder: SortOrder = .ascending, by transform: (Self.Iterator.Element) -> T) -> Self.Iterator.Element? {
+        return self.max {
+            sortOrder.isOrderedBefore(transform($0), transform($1))
+        }
+    }
+}
+
+extension Sequence where Iterator.Element: Comparable {
+    /// Returns the elements of the sequence, sorted using the given sort order.
+    public func sorted(order sortOrder: SortOrder) -> [Self.Iterator.Element] {
+        return sorted { sortOrder.isOrderedBefore($0, $1) }
+    }
 }
 

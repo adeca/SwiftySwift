@@ -23,7 +23,30 @@ extension Optional: OptionalConvertible {
 
 extension Sequence where Iterator.Element : OptionalConvertible {
     /// return an `Array` containing the non-nil values in `self`
+    @available(*, deprecated)
     public func flatMap() -> [Iterator.Element.SomeValue] {
-        return flatMap { $0.optionalValue }
+        return removingNilValues()
     }
+    
+    /// return an `Array` containing the non-nil values in `self`
+    public func removingNilValues() -> [Iterator.Element.SomeValue] {
+        var result: [Iterator.Element.SomeValue] = []
+        for element in self {
+            if let value = element.optionalValue {
+                result.append(value)
+            }
+        }
+        return result
+    }
+}
+
+/// Returns `true` if these arrays contain the same elements in the same order.
+public func ==<T: OptionalConvertible>(lhs: [T], rhs: [T]) -> Bool where T.SomeValue: Equatable {
+    return !(lhs != rhs)
+}
+
+/// Returns `true` if these arrays do not contain the same elements in the same order.
+public func != <T: OptionalConvertible>(lhs: [T], rhs: [T]) -> Bool where T.SomeValue: Equatable {
+    return lhs.count != rhs.count
+        || zip(lhs, rhs).contains(where: { $0.optionalValue != $1.optionalValue })
 }
