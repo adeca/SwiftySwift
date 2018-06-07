@@ -23,19 +23,26 @@ extension Optional: OptionalConvertible {
 
 extension Sequence where Element : OptionalConvertible {
     /// return an `Array` containing the non-nil values in `self`
+    /// DEPRECATED: use `compact`
     @available(*, deprecated)
     public func flatMap() -> [Element.SomeValue] {
         return removingNilValues()
     }
     
     /// return an `Array` containing the non-nil values in `self`
-    public func removingNilValues() -> [Iterator.Element.SomeValue] {
-        var result: [Iterator.Element.SomeValue] = []
+    /// DEPRECATED: use `compact`
+    @available(*, deprecated)
+    public func removingNilValues() -> [Element.SomeValue] {
+        var result: [Element.SomeValue] = []
         for element in self {
             if let value = element.optionalValue {
                 result.append(value)
             }
         }
         return result
+    }
+    
+    public func compact() -> [Element.SomeValue] {
+        return compactMap { $0.optionalValue }
     }
 }
