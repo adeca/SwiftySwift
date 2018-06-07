@@ -39,14 +39,3 @@ extension Sequence where Iterator.Element : OptionalConvertible {
         return result
     }
 }
-
-/// Returns `true` if these arrays contain the same elements in the same order.
-public func ==<T: OptionalConvertible>(lhs: [T], rhs: [T]) -> Bool where T.SomeValue: Equatable {
-    return !(lhs != rhs)
-}
-
-/// Returns `true` if these arrays do not contain the same elements in the same order.
-public func != <T: OptionalConvertible>(lhs: [T], rhs: [T]) -> Bool where T.SomeValue: Equatable {
-    return lhs.count != rhs.count
-        || zip(lhs, rhs).contains(where: { $0.optionalValue != $1.optionalValue })
-}

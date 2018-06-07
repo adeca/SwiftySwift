@@ -89,8 +89,3 @@ public func ratio<T: FloatingPoint>(_ x: T, min: T, max: T) -> T {
 public func clamp<T: Comparable>(_ x: T, min: T, max: T) -> T {
     return x.clamp(min: min, max: max)
 }
-
-@available(*, deprecated)
-public func clamp<T: Comparable>(_ x: T, _ min: T, _ max: T) -> T {
-    return clamp(x, min: min, max: max)
-}
