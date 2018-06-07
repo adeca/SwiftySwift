@@ -22,7 +22,7 @@ extension Collection where Iterator.Element : Equatable {
     }
 }
 
-extension Collection where Index == Int, IndexDistance == Int {
+extension Collection where Index == Int {
     public func randomElement() -> Iterator.Element? {
         let count = UInt32(self.count)
         guard count > 0 else { return nil }

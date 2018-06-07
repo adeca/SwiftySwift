@@ -21,10 +21,10 @@ extension Optional: OptionalConvertible {
 
 // MARK: - SequenceType + OptionalConvertible
 
-extension Sequence where Iterator.Element : OptionalConvertible {
+extension Sequence where Element : OptionalConvertible {
     /// return an `Array` containing the non-nil values in `self`
     @available(*, deprecated)
-    public func flatMap() -> [Iterator.Element.SomeValue] {
+    public func flatMap() -> [Element.SomeValue] {
         return removingNilValues()
     }
     

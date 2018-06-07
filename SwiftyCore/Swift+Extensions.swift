@@ -38,16 +38,19 @@ public func cast<U, V>(_ x: U) -> V? {
 
 /// Return all values of `source` that were successfully casted to type `V`
 public func castFilter<S: Sequence, V>(_ source: S) -> [V] {
-    return source.flatMap {
+    return source.compactMap {
         $0 as? V
     }
 }
 
 /// Return the first value of `source` that was successfully casted to type `V`
 public func castFirst<S: Sequence, V>(_ source: S) -> V? {
-    return source.flatMap {
-        $0 as? V
-    }.first
+    for e in source {
+        if let casted = e as? V {
+            return casted
+        }
+    }
+    return nil
 }
 
 /// Forced cast of `x` as type `V`

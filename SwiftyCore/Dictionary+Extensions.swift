@@ -9,31 +9,25 @@
 // MARK: - Dictionary
 
 extension Dictionary {
-    public init<S: Sequence>(elements: S) where S.Iterator.Element == (Key, Value) {
-        self.init()
-        update(withContentsOf: elements)
-    }
-    
-    public init<C: Collection>(elements: C) where C.Iterator.Element == (Key, Value), C.IndexDistance == Int {
-        self.init(minimumCapacity: elements.count)
-        update(withContentsOf: elements)
-    }   
-    
-    /// Update the values stored in the dictionary with the given key-value pairs, or, if a key does not exist, add a new entry.
-    @discardableResult
-    public mutating func update<S: Sequence>(withContentsOf newElements: S) -> [Value] 
-        where S.Iterator.Element == (Key, Value) {
-        return newElements.flatMap { (k, v) in 
-            updateValue(v, forKey: k) 
-        }
+    public init<S: Sequence>(elements: S) where S.Element == (Key, Value) {
+        self = Dictionary(elements, uniquingKeysWith: { (_, new) in new })
     }
     
     /// Update the values stored in the dictionary with the given key-value pairs, or, if a key does not exist, add a new entry.
     @discardableResult
     public mutating func update<S: Sequence>(withContentsOf newElements: S) -> [Value] 
-        where S.Iterator.Element == Element {
-        return newElements.flatMap { (k, v) in
-            updateValue(v, forKey: k) 
-        }
+        where S.Element == (Key, Value) {
+            return newElements.compactMap { (k, v) in
+                updateValue(v, forKey: k)
+            }
+    }
+    
+    /// Update the values stored in the dictionary with the given key-value pairs, or, if a key does not exist, add a new entry.
+    @discardableResult
+    public mutating func update<S: Sequence>(withContentsOf newElements: S) -> [Value] 
+        where S.Element == Element {
+            return newElements.compactMap { (k, v) in
+                updateValue(v, forKey: k)
+            }
     }
 }

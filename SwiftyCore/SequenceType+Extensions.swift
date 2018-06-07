@@ -10,7 +10,7 @@
 
 extension Sequence where Iterator.Element : Equatable {
     /// Return `true` iff all elements of `other` are contained in `self`.
-    public func contains<S: Sequence>(_ other: S) -> Bool where S.Iterator.Element == Iterator.Element {
+    public func contains<S: Sequence>(_ other: S) -> Bool where S.Element == Element {
         return other.all { self.contains($0) }
     }
     
@@ -90,8 +90,8 @@ extension Sequence {
      key will overwrite previous entries.
      */
     public func mapToDictionary<Key, Value>(_ transform: (Iterator.Element) -> (Key, Value)?) -> [Key: Value] {
-        let elements = flatMap(transform)
-        return Dictionary(elements: elements)
+        let elements = compactMap(transform)
+        return Dictionary(elements, uniquingKeysWith: { _, new in new })
     }
     
     /**
@@ -116,18 +116,8 @@ extension Sequence {
      Returning `nil` will generate no entry for that element.
      */
     public func groupBy<Key, Value>(_ transform: (Iterator.Element) -> (Key, Value)?) -> [Key: [Value]] {
-        
-        let elements = flatMap(transform)
-        let keys = Set(elements.map { $0.0 })
-        
-        let grouped = keys.map { (key: Key) -> (Key, [Value]) in
-            let keyElements = elements.filter { $0.0 == key }
-            let values = keyElements.map { $0.1 }
-            
-            return (key, values)
-        }
-        
-        return Dictionary(elements: grouped)
+        let elements = compactMap(transform).map { ($0, [$1]) }
+        return Dictionary.init(elements, uniquingKeysWith: +)
     }
     
     /**
@@ -139,9 +129,10 @@ extension Sequence {
      Returning `nil` will generate no entry for that element.
      */
     public func groupBy<Key>(_ transform: (Iterator.Element) -> Key?) -> [Key: [Iterator.Element]] {
-        return groupBy { value in
-            transform(value).map({ ($0, value) })
-        }
+        let elements = compactMap({ value in
+            transform(value).map({ ($0, [value]) })
+        })
+        return Dictionary.init(elements, uniquingKeysWith: +)
     }
     
     /**
@@ -153,7 +144,7 @@ extension Sequence {
      Returning `nil` will generate no entry for that element.
      */
     public func groupValues<Key: Equatable, Value>(_ transform: (Iterator.Element) -> (Key, Value)?) -> [[Value]] {
-        let elements = flatMap(transform)
+        let elements = compactMap(transform)
         let keys = elements.map { $0.0 }.filteringDuplicates()
         return keys.map { key in
             elements.filter { $0.0 == key }.map { $0.1 }
